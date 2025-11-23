@@ -6,12 +6,54 @@
     <title>SIBALEONE Metal Minting - Luca Urbani</title>
     <style>
         body {font-family: Arial, sans-serif; margin:0; background:#f9f5f0; color:#333; line-height:1.6;}
-        header {background:#8B4513; color:white; padding:60px 20px; text-align:center;}
-        nav {background:#A0522D; padding:15px; text-align:center; position:sticky; top:0; z-index:1000;}
+        * {box-sizing:border-box;}
+
+        /* HEADER - Perfect on mobile landscape */
+        header {
+            background: url('media/Lion Header.jpg') center/cover no-repeat;
+            height: 100dvh;
+            min-height: 620px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 20px;
+            text-align: center;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.62);
+        }
+        header > div {
+            position: relative;
+            z-index: 2;
+            color: white;
+            max-width: 95%;
+        }
+        header h1 {
+            font-size: clamp(3.2rem, 11vw, 7rem);
+            margin: 0 0 20px;
+            text-shadow: 4px 4px 20px rgba(0,0,0,0.9);
+            letter-spacing: 3px;
+        }
+        header p {
+            font-size: clamp(1.4rem, 4.5vw, 2.3rem);
+            text-shadow: 3px 3px 15px rgba(0,0,0,0.9);
+            letter-spacing: 1.5px;
+            margin: 0;
+        }
+
+        nav {
+            background:#A0522D; padding:15px; text-align:center; position:sticky; top:0; z-index:1000;
+        }
         nav a {color:white; margin:0 20px; text-decoration:none; font-weight:bold; font-size:1.1em;}
         section {padding:60px 20px; text-align:center;}
         h1,h2,h3 {color:#8B4513;}
 
+        /* Gallery */
         .gallery {display:flex; flex-wrap:wrap; gap:22px; justify-content:center; padding:20px;}
         .photo-wrapper {position:relative; width:310px; cursor:zoom-in;}
         .gallery img {width:100%; height:auto; border:5px solid #8B4513; border-radius:12px; transition:transform .2s;}
@@ -34,179 +76,187 @@
         .contact-photo {width:240px; height:240px; border-radius:50%; object-fit:cover; border:7px solid #8B4513; box-shadow:0 8px 25px rgba(0,0,0,0.4);}
         .email {font-size:1.6em; font-weight:bold; color:#8B4513;}
 
-        /* ====================== LIGHTBOX ====================== */
+        /* LIGHTBOX */
         #lightbox {
-            display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%;
-            background:rgba(0,0,0,0.98); text-align:center; overflow:hidden;
-            cursor: grab;
+            display:none; position:fixed; z-index:9999; inset:0;
+            background:rgba(0,0,0,0.98); overflow:hidden;
+            cursor:grab;
         }
-        #lightbox:active {cursor: grabbing;}
+        #lightbox.dragging {cursor:grabbing;}
 
         #lightbox .img-container {
-            position:absolute;
-            top:50%; left:50%;
-            transform:translate(-50%,-50%);
-            user-select:none;
+            position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+            user-select:none; touch-action:none;
         }
         #lightbox-img {
-            max-width:95vw; 
-            max-height:95vh;
-            border:7px solid #8B4513;
-            border-radius:14px;
+            max-width:95vw; max-height:95vh;
+            border:7px solid #8B4513; border-radius:14px;
             box-shadow:0 0 40px rgba(0,0,0,0.9);
-            transition:none; /* smooth dragging */
+            transition:none;
         }
-        .close-btn {position:fixed; top:15px; right:30px; color:white; font-size:70px; font-weight:bold; cursor:pointer; z-index:10000;}
+        .close-btn {
+            position:fixed; top:15px; right:30px; color:white; font-size:70px;
+            font-weight:bold; cursor:pointer; z-index:10000;
+        }
         .nav-arrow {
-            position:fixed; top:50%; transform:translateY(-50%); color:white; font-size:80px;
-            cursor:pointer; user-select:none; z-index:10000; opacity:0.7;
+            position:fixed; top:50%; transform:translateY(-50%);
+            color:white; font-size:80px; cursor:pointer; z-index:10000;
+            opacity:0.7; font-weight:bold; user-select:none;
         }
         .nav-arrow:hover {opacity:1;}
         .prev-arrow {left:20px;}
         .next-arrow {right:20px;}
 
-        /* Caption completely hidden in fullscreen */
-        .lightbox-caption {display:none !important;}
+        /* Beautiful rotate hint */
+        #tilt-hint {
+            position:fixed;
+            bottom:30px; left:50%; transform:translateX(-50%);
+            z-index:9999;
+            background:rgba(0,0,0,0.85);
+            padding:16px 32px;
+            border-radius:50px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.6);
+            display:none;
+            align-items:center;
+            gap:14px;
+            animation: float 3s ease-in-out infinite;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        #tilt-hint img {height:42px; filter: drop-shadow(0 0 8px white);}
+        #tilt-hint span {color:white; font-weight:bold; font-size:1.15em; text-shadow:0 2px 10px black;}
 
-        footer {background:#8B4513; color:white; padding:30px; text-align:center;}
+        @keyframes float {
+            0%, 100% {transform:translateX(-50%) translateY(0);}
+            50% {transform:translateX(-50%) translateY(-10px);}
+        }
+
+        footer {
+            background:url('media/Lion Greek plus mans.png') center/cover no-repeat;
+            height:380px; display:flex; flex-direction:column;
+            justify-content:flex-end; position:relative; color:white;
+        }
+        footer::before {content:''; position:absolute; inset:0; background:rgba(0,0,0,0.68);}
+        footer > div {
+            position:relative; z-index:2; text-align:center; padding:30px;
+            background:rgba(139,69,19,0.75);
+        }
     </style>
 </head>
 <body>
-<!-- (all your HTML stays exactly the same until the lightbox div) -->
 
-    <!-- Lightbox -->
-    <div id="lightbox">
-        <span class="close-btn">×</span>
-        <span class="nav-arrow prev-arrow">←</span>
-        <span class="nav-arrow next-arrow">→</span>
-        <div class="img-container">
-            <img id="lightbox-img" src="" alt="">
-            <!-- caption removed from DOM or just hidden via CSS -->
+<!-- Elegant rotate phone hint -->
+<div id="tilt-hint">
+    <img src="https://i.ibb.co/7zN0Y3k/rotate-phone.gif" alt="Rotate phone">
+    <span>Rotate for best view</span>
+</div>
+
+<script>
+    function checkOrientation() {
+        const hint = document.getElementById('tilt-hint');
+        if (window.innerHeight > window.innerWidth && window.innerWidth < 1000) {
+            hint.style.display = 'flex';
+        } else {
+            hint.style.display = 'none';
+        }
+    }
+    window.addEventListener('resize', checkOrientation);
+    window.addEventListener('orientationchange', checkOrientation);
+    checkOrientation();
+</script>
+
+<header>
+    <div>
+        <h1>SIBALEONE Metal Minting</h1>
+        <p>Hand-forged copper coins & bars by Luca Urbani — Pure artisan fire.</p>
+    </div>
+</header>
+
+<nav>
+    <a href="#about">About</a>
+    <a href="#photos">Gallery</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<section id="about">
+    <h2>About Luca Urbani — SIBALEONE</h2>
+    <p>I am a blacksmith with a passion for working with metal in all its forms…</p>
+    <h3>Featured work</h3>
+    <div class="featured">
+        <div class="photo-wrapper" data-caption="SIBALEONE Lion Coin"><img src="media/13.jpg" alt=""></div>
+        <div class="photo-wrapper" data-caption="Pi Network Coin (2024)"><img src="media/26.jpg" alt=""></div>
+        <div class="photo-wrapper" data-caption="Hand and feet of my newborn son in PURE METAL"><img src="media/24.png" alt=""></div>
+    </div>
+</section>
+
+<section id="photos">
+    <h2>The recycling of metal</h2>
+    <div class="gallery">
+        <div class="photo-wrapper"><img src="media/1.1.jpg" alt=""><div class="caption">The fire</div></div>
+        <div class="photo-wrapper"><img src="media/1.jpg" alt=""><div class="caption">Fire ready</div></div>
+        <div class="photo-wrapper"><img src="media/2.1.png" alt=""><div class="caption">Raw material (copper wires top quality)</div></div>
+        <div class="photo-wrapper"><img src="media/2.jpg" alt=""><div class="caption">Raw material (pipes second quality)</div></div>
+        <div class="photo-wrapper"><img src="media/4.jpg" alt=""><div class="caption">Crucible cooling out of gas :(</div></div>
+        <div class="photo-wrapper"><img src="media/5.jpeg" alt=""><div class="caption">Heating pipes to remove contaminants</div></div>
+        <div class="photo-wrapper"><img src="media/6.jpeg" alt=""><div class="caption">Inspecting the GOODS</div></div>
+        <div class="photo-wrapper"><img src="media/7.1.jpeg" alt=""><div class="caption">Copper coins after striking (not polished yet)</div></div>
+        <div class="photo-wrapper"><img src="media/7.jpeg" alt=""><div class="caption">Copper bars before polishing</div></div>
+        <div class="photo-wrapper"><img src="media/8.1.jpeg" alt=""><div class="caption">Close-up detail after polishing</div></div>
+        <div class="photo-wrapper"><img src="media/8.2.jpg" alt=""><div class="caption">Grabbing the goods</div></div>
+        <div class="photo-wrapper"><img src="media/8.3.jpeg" alt=""><div class="caption">Copper and Gold</div></div>
+        <div class="photo-wrapper"><img src="media/8.jpg" alt=""><div class="caption">Gently buffing Gold bar</div></div>
+        <div class="photo-wrapper"><img src="media/10.1.jpeg" alt=""><div class="caption">Copper Marvel</div></div>
+        <div class="photo-wrapper"><img src="media/10.jpeg" alt=""><div class="caption">Copper Marvel (Close-up)</div></div>
+        <div class="photo-wrapper"><img src="media/11.1.jpeg" alt=""><div class="caption">All unique art pieces</div></div>
+        <div class="photo-wrapper"><img src="media/12.jpeg" alt=""><div class="caption">Coin ready for shipping</div></div>
+        <div class="photo-wrapper"><img src="media/13.1.jpg" alt=""><div class="caption">Weighting the coin</div></div>
+        <div class="photo-wrapper"><img src="media/13.jpg" alt=""><div class="caption">Bars and coins ready for inspection</div></div>
+        <div class="photo-wrapper"><img src="media/18.jpg" alt=""><div class="caption">Raising the bar</div></div>
+        <div class="photo-wrapper"><img src="media/19.jpeg" alt=""><div class="caption">Metal stamp</div></div>
+        <div class="photo-wrapper"><img src="media/20.jpeg" alt=""><div class="caption">Buisness card</div></div>
+        <div class="photo-wrapper"><img src="media/22.jpg" alt=""><div class="caption">Bars ready for selling</div></div>
+        <div class="photo-wrapper"><img src="media/23.png" alt=""><div class="caption">Contract for Pi Network DONE</div></div>
+        <div class="photo-wrapper"><img src="media/24.png" alt=""><div class="caption">Pi Network coin (made in 2024)</div></div>
+        <div class="photo-wrapper"><img src="media/25.jpg" alt=""><div class="caption">Methodology for Pi project</div></div>
+        <div class="photo-wrapper"><img src="media/26.jpg" alt=""><div class="caption">Hand and feet of my newborn son in PURE METAL</div></div>
+    </div>
+</section>
+
+<section id="contact">
+    <h2>Contact</h2>
+    <div class="contact-container">
+        <img src="media/Luca.jpg" alt="Luca Urbani" class="contact-photo">
+        <div class="contact-text">
+            <p>If you'd like to share your minting stories, ask questions, or collaborate, feel free to reach out:</p>
+            <p><strong>Phone:</strong> 418.376.7316</p>
+            <p class="email">urbani.luca639@gmail.com</p>
         </div>
     </div>
+</section>
 
-<!-- (rest of your HTML unchanged) -->
+<!-- Lightbox with real arrow symbols -->
+<div id="lightbox">
+    <span class="close-btn">×</span>
+    <span class="nav-arrow prev-arrow">Left Arrow</span>
+    <span class="nav-arrow next-arrow">Right Arrow</span>
+    <div class="img-container">
+        <img id="lightbox-img" src="" alt="">
+    </div>
+</div>
+
+<footer>
+    <div>
+        <p style="margin:0; font-size:1.1rem; font-weight:bold; text-shadow:2px 2px 8px rgba(0,0,0,0.9);">
+            © 2025 SIBALEONE Metal Minting — Hand-forged by Luca Urbani<br>All rights reserved
+        </p>
+    </div>
+</footer>
 
 <script>
     const lightbox = document.getElementById('lightbox');
     const lbImg = document.getElementById('lightbox-img');
     const prevBtn = document.querySelector('.prev-arrow');
     const nextBtn = document.querySelector('.next-arrow');
-
-    let allPhotos = [...document.querySelectorAll('.photo-wrapper')];
+    const allPhotos = [...document.querySelectorAll('.photo-wrapper')];
     let currentIndex = 0;
-
-    // Dragging & zoom variables
-    let scale = 1;
-    let posX = 0, posY = 0;
-    let startX = 0, startY = 0;
-    let isDragging = false;
-
-    function updateTransform() {
-        lbImg.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
-    }
-
-    function openLightbox(index) {
-        currentIndex = index;
-        const wrapper = allPhotos[index];
-        const img = wrapper.querySelector('img');
-        lbImg.src = img.src;
-
-        // reset everything
-        scale = 1;
-        posX = posY = 0;
-        updateTransform();
-
-        lightbox.style.display = 'block';
-    }
-
-    function closeLightbox() { lightbox.style.display = 'none'; }
-    function showPrev() { currentIndex = (currentIndex - 1 + allPhotos.length) % allPhotos.length; openLightbox(currentIndex); }
-    function showNext() { currentIndex = (currentIndex + 1) % allPhotos.length; openLightbox(currentIndex); }
-
-    // Open gallery images
-    allPhotos.forEach((wrapper, i) => wrapper.addEventListener('click', () => openLightbox(i)));
-
-    // Close
-    lightbox.addEventListener('click', e => {
-        if (e.target === lightbox || e.target.classList.contains('close-btn')) closeLightbox();
-    });
-    document.addEventListener('keydown', e => {
-        if (lightbox.style.display !== 'block') return;
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowLeft') showPrev();
-        if (e.key === 'ArrowRight') showNext();
-    });
-
-    prevBtn.addEventListener('click', showPrev);
-    nextBtn.addEventListener('click', showNext);
-
-    // ====================== MOUSE WHEEL ZOOM ======================
-    lightbox.addEventListener('wheel', e => {
-        e.preventDefault();
-        const delta = e.deltaY > 0 ? 0.9 : 1.1;
-        scale = Math.max(0.5, Math.min(scale * delta, 8));
-        updateTransform();
-    });
-
-    // ====================== MOUSE DRAG TO PAN ======================
-    lbImg.addEventListener('mousedown', e => {
-        if (scale === 1) return;
-        e.preventDefault();
-        isDragging = true;
-        startX = e.clientX - posX;
-        startY = e.clientY - posY;
-        lightbox.style.cursor = 'grabbing';
-    });
-
-    document.addEventListener('mousemove', e => {
-        if (!isDragging) return;
-        e.preventDefault();
-        posX = e.clientX - startX;
-        posY = e.clientY - startY;
-        updateTransform();
-    });
-
-    document.addEventListener('mouseup', () => {
-        isDragging = false;
-        lightbox.style.cursor = 'grab';
-    });
-
-    // ====================== TOUCH SUPPORT (pinch + drag) ======================
-    let startDist = 0, startScale = 1;
-
-    lightbox.addEventListener('touchstart', e => {
-        if (e.touches.length === 2) {
-            e.preventDefault();
-            startDist = Math.hypot(
-                e.touches[0].pageX - e.touches[1].pageX,
-                e.touches[0].pageY - e.touches[1].pageY
-            );
-            startScale = scale;
-        } else if (e.touches.length === 1 && scale > 1) {
-            e.preventDefault();
-            startX = e.touches[0].pageX - posX;
-            startY = e.touches[0].pageY - posY;
-        }
-    });
-
-    lightbox.addEventListener('touchmove', e => {
-        if (e.touches.length === 2) {
-            e.preventDefault();
-            const currDist = Math.hypot(
-                e.touches[0].pageX - e.touches[1].pageX,
-                e.touches[0].pageY - e.touches[1].pageY
-            );
-            scale = startScale * (currDist / startDist);
-            scale = Math.max(0.5, Math.min(scale, 8));
-            updateTransform();
-        } else if (e.touches.length === 1 && scale > 1) {
-            e.preventDefault();
-            posX = e.touches[0].pageX - startX;
-            posY = e.touches[0].pageY - startY;
-            updateTransform();
-        }
-    });
-</script>
-</body>
-</html>
+   
