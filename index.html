@@ -222,7 +222,15 @@ I confront fear as a warrior does—and each challenge hardens my spirit.</p>
 
     <!-- Card-style thumbnail that opens the modal player -->
     <div class="video-card" role="button" tabindex="0" aria-pressed="false" aria-label="Open video player">
-      <div class="video-thumb" style="background-image:url('media/9.jpg')">
+      <div class="video-thumb" style="background-image:url('media/9.jpg');
+     aspect-ratio:9/16; max-width:460px; width:90%; margin:0 auto;">
+  <button class="play-btn" aria-hidden="true">
+    <svg viewBox="0 0 64 64" width="70" height="70" aria-hidden="true" focusable="false">
+      <circle cx="32" cy="32" r="31" fill="rgba(0,0,0,0.62)" stroke="#8B4513" stroke-width="3"/>
+      <path d="M24 18 L48 32 L24 46 Z" fill="#fff"/>
+    </svg>
+  </button>
+</div>
         <button class="play-btn" aria-hidden="true">
           <!-- Crisp SVG play icon -->
           <svg viewBox="0 0 64 64" width="60" height="60" aria-hidden="true" focusable="false">
