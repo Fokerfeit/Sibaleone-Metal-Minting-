@@ -67,7 +67,7 @@
 <body>
 
      <header style="
-        background: url('media/Lion Greek.png') center/cover no-repeat;
+        background: url('media/Lion King.png') center/cover no-repeat;
         padding: 0;
         height: 660px;
         display: flex;
@@ -181,8 +181,44 @@
         </div>
     </div>
 
-    <footer>
-        <p>© 2025 SIBALEONE Metal Minting. All rights reserved.</p>
+      <footer style="
+        background: url('media/Lion Greek.png') center/cover no-repeat;
+        padding: 0;
+        height: 380px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        position: relative;
+        margin: 0;
+        color: white;
+    ">
+        <!-- Dark overlay so the text is readable -->
+        <div style="
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.68);
+        "></div>
+
+        <!-- Footer text – sits nicely at the bottom over the lion image -->
+        <div style="
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 30px;
+            width: 100%;
+            background: rgba(139,69,19,0.75); /* matches your brown theme */
+        ">
+            <p style="
+                margin: 0;
+                font-size: 1.1rem;
+                font-weight: bold;
+                text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+            ">
+                © 2025 SIBALEONE Metal Minting — Hand-forged by Luca Urbani<br>
+                All rights reserved
+            </p>
+        </div>
     </footer>
 
     <script>
