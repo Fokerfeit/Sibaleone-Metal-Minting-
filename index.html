@@ -5,58 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIBALEONE Metal Minting</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f5f0; color: #333; line-height: 1.6; }
-        header { background: #8B4513; color: white; padding: 40px; text-align: center; }
+        body { font-family: Arial, sans-serif; margin: 0; background: #f9f5f0; color: #333; line-height: 1.6; }
+        header { background: #8B4513; color: white; padding: 50px; text-align: center; }
         nav { background: #A0522D; padding: 15px; text-align: center; }
         nav a { color: white; margin: 0 20px; text-decoration: none; font-weight: bold; }
-        nav a:hover { text-decoration: underline; }
-        section { padding: 40px; text-align: center; }
-        h2 { color: #8B4513; }
+        section { padding: 50px 20px; text-align: center; }
+        h1, h2 { color: #8B4513; }
 
-        /* Gallery */
-        .gallery { 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 15px; 
-            justify-content: center; 
-            padding: 20px;
+        /* Gallery + Captions */
+        .gallery {
+            display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding: 20px;
         }
-        .gallery img, .gallery video {
-            width: 300px;
-            height: auto;
-            object-fit: contain;
-            border: 3px solid #8B4513;
-            border-radius: 8px;
-            cursor: zoom-in;
-            transition: transform 0.2s;
+        .photo-wrapper {
+            position: relative; width: 300px;
+        }
+        .gallery img {
+            width: 100%; height: auto; border: 4px solid #8B4513; border-radius: 10px;
+            cursor: zoom-in; transition: transform 0.2s;
         }
         .gallery img:hover { transform: scale(1.05); }
+        .caption {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            background: rgba(0,0,0,0.7); color: white; padding: 8px; font-size: 0.9em;
+            text-align: center; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;
+        }
 
         /* Contact */
         .contact-container {
-            display: flex; align-items: center; gap: 30px; flex-wrap: wrap; justify-content: center; padding: 20px;
+            display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap; max-width: 900px; margin: 0 auto;
         }
         .contact-photo {
-            width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 4px solid #8B4513;
+            width: 220px; height: 220px; border-radius: 50%; object-fit: cover;
+            border: 6px solid #8B4513; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
-        .contact-text { text-align: center; max-width: 600px; }
-        .email { font-size: 1.4em; font-weight: bold; color: #8B4513; }
+        .email { font-size: 1.5em; font-weight: bold; color: #8B4513; }
 
-        /* Fullscreen lightbox */
+        /* Lightbox with zoom scroller & caption */
         #lightbox {
             display: none; position: fixed; z-index: 9999; left: 0; top: 0;
-            width: 100%; height: 100%; background: rgba(0,0,0,0.95); cursor: pointer;
+            width ```100%; height: 100%; background: rgba(0,0,0,0.98); overflow: hidden;
         }
         #lightbox-img {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-            max-width: 95%; max-height: 95%; border: 4px solid #8B4513; border-radius: 8px;
+            max-width: 90%; max-height: 85%; transition: transform 0.2s;
+            border: 6px solid #8B4513; border-radius: 12px;
         }
         .close-btn {
-            position: absolute; top: 20px; right: 30px; color: white; font-size: 50px;
-            font-weight: bold; cursor: pointer;
+            position: absolute; top: 20px; right: 35px; color: white; font-size: 60px;
+            font-weight: bold; cursor: pointer; z-index: 10001;
+        }
+        .lightbox-caption {
+            position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.8);
+            color: white; padding: 15px; text-align: center; font-size: 1.3em;
+        }
+        /* Zoom scroller on the right */
+        #zoom-slider {
+            position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+            width: 12px; height: 60%; background: rgba(255,255,255,0.3); border-radius: 6px;
+        }
+        #zoom-handle {
+            width: 100%; height: 60px; background: #8B4513; border-radius: 6px; cursor: ns-resize;
         }
 
-        footer { background: #8B4513; color: white; text-align: center; padding: 20px; }
+        footer { BACKGROUND: #8B4513; color: white; padding: 25px; text-align: center; }
     </style>
 </head>
 <body>
@@ -75,90 +86,105 @@
 
     <section id="about">
         <h2>About SIBALEONE Metal Minting</h2>
-        <p>I am a blacksmith with a passion for working with metal in all its forms.
-Whether it’s steel, copper, brass, or something more unusual, I enjoy transforming raw materials into meaningful, durable creations. I am open to a wide variety of projects—functional, decorative, experimental—and I’m always eager to learn new techniques and explore new ideas. If you have a vision, a concept, or even just the seed of an idea, I would love to bring it to life with you. Feel free to reach out and let’s create something unique together.</p>
+        <p>I am a blacksmith with a passion for working with metal in all its forms…</p>
     </section>
 
     <section id="photos">
         <h2>Photo Gallery</h2>
         <div class="gallery">
-            <img src="media/1.1.jpg" alt="Fire">
-            <img src="media/1.jpg" alt="Molten copper">
-            <img src="media/2.1.png" alt="Crucible">
-            <img src="media/2.jpg" alt="Pouring">
-            <img src="media/4.jpg" alt="Hammer">
-            <img src="media/5.jpeg" alt="Blacksmith">
-            <img src="media/6.jpeg" alt="Cooling">
-            <img src="media/7.1.jpeg" alt="Bar">
-            <img src="media/7.jpeg" alt="Bar">
-            <img src="media/8.1.jpeg" alt="Coin">
-            <img src="media/8.2.jpg" alt="Bar edge">
-            <img src="media/8.3.jpeg" alt="Stack">
-            <img src="media/8.jpg" alt="Hand holding">
-            <img src="media/10.1.jpeg" alt="Polishing">
-            <img src="media/10.jpeg" alt="Coin front">
-            <img src="media/11.1.jpeg" alt="Multiple coins">
-            <img src="media/12.jpeg" alt="Coin and bar">
-            <img src="media/13.1.jpg" alt="Lion close-up">
-            <img src="media/13.jpg" alt="Lion coin">
-            <img src="media/18.jpg" alt="Hand with bar">
-            <img src="media/19.jpeg" alt="Logo">
-            <img src="media/20.jpeg" alt="Custom coin">
-            <img src="media/22.jpg" alt="Business card">
-            <img src="media/23.png" alt="Branding">
-            <img src="media/24.png" alt="Pi coin">
-            <img src="media/25.jpg" alt="Pi detail">
-            <img src="media/26.jpg" alt="Hand with Pi">
-        </div>
-    </section>
-
-    <section id="videos">
-        <h2>Video Gallery</h2>
-        <div class="gallery">
-            <!-- Add your real videos here when ready -->
-            <video controls poster="media/thumbnail1.jpg"><source src="media/video1.mp4" type="video/mp4"></video>
-            <video controls poster="media/thumbnail2.jpg"><source src="media/video2.mp4" type="video/mp4"></video>
+            <div class="photo-wrapper"><img src="media/1.1.jpg" alt=""><div class="caption">Starting the fire</div></div>
+            <div class="photo-wrapper"><img src="media/1.jpg" alt=""><div class="caption">Molten copper glow</div></div>
+            <div class="photo-wrapper"><img src="media/2.1.png" alt=""><div class="caption">Crucible ready</div></div>
+            <div class="photo-wrapper"><img src="media/2.jpg" alt=""><div class="caption">Pouring the melt</div></div>
+            <div class="photo-wrapper"><img src="media/4.jpg" alt=""><div class="caption">Hammer strike</div></div>
+            <div class="photo-wrapper"><img src="media/5.jpeg" alt=""><div class="caption">Working the forge</div></div>
+            <div class="photo-wrapper"><img src="media/6.jpeg" alt=""><div class="caption">Cooling the coin</div></div>
+            <div class="photo-wrapper"><img src="media/7.1.jpeg" alt=""><div class="caption">Finished copper bar</div></div>
+            <div class="photo-wrapper"><img src="media/7.jpeg" alt=""><div class="caption">Pure copper bar</div></div>
+            <div class="photo-wrapper"><img src="media/8.1.jpeg" alt=""><div class="caption">Close-up detail</div></div>
+            <div class="photo-wrapper"><img src="media/8.2.jpg" alt=""><div class="caption">Edge view</div></div>
+            <div class="photo-wrapper"><img src="media/8.3.jpeg" alt=""><div class="caption">Stacked pieces</div></div>
+            <div class="photo-wrapper"><img src="media/8.jpg" alt=""><div class="caption">Hand holding coin</div></div>
+            <div class="photo-wrapper"><img src="media/10.1.jpeg" alt=""><div class="caption">Polishing</div></div>
+            <div class="photo-wrapper"><img src="media/10.jpeg" alt=""><div class="caption">Mirror finish</div></div>
+            <div class="photo-wrapper"><img src="media/11.1.jpeg" alt=""><div class="caption">Collection</div></div>
+            <div class="photo-wrapper"><img src="media/12.jpeg" alt=""><div class="caption">Coin & bar together</div></div>
+            <div class="photo-wrapper"><img src="media/13.1.jpg" alt=""><div class="caption">Lion emblem detail</div></div>
+            <div class="photo-wrapper"><img src="media/13.jpg" alt=""><div class="caption">SIBALEONE Lion coin</div></div>
+            <div class="photo-wrapper"><img src="media/18.jpg" alt=""><div class="caption">Holding the bar</div></div>
+            <div class="photo-wrapper"><img src="media/19.jpeg" alt=""><div class="caption">Logo coin</div></div>
+            <div class="photo-wrapper"><img src="media/20.jpeg" alt=""><div class="caption">Custom minting</div></div>
+            <div class="photo-wrapper"><img src="media/22.jpg" alt=""><div class="caption">Business card coin</div></div>
+            <div class="photo-wrapper"><img src="media/23.png" alt=""><div class="caption">SIBALEONE branding</div></div>
+            <div class="photo-wrapper"><img src="media/24.png" alt=""><div class="caption">Pi Network coin</div></div>
+            <div class="photo-wrapper"><img src="media/25.jpg" alt=""><div class="caption">Pi detail</div></div>
+            <div class="photo-wrapper"><img src="media/26.jpg" alt=""><div class="caption">Pi coin in hand</div></div>
         </div>
     </section>
 
     <section id="contact">
-    <h2>Contact</h2>
-    <div class="contact-container">
-        <img src="media/9999.jpeg" alt="Luca Urbani" class="contact-photo">
-        <div class="contact-text">
-            <p>If you'd like to share your minting stories, ask questions, or collaborate, feel free to reach out:</p>
-            <p><strong>Phone:</strong> 418.376.7316</p>
-            <p class="email">urbani.luca639@gmail.com</p>
+        <h2>Contact</h2>
+        <div class="contact-container">
+            <img src="media/9999.jpeg" alt="Luca Urbani" class="contact-photo">
+            <div class="contact-text">
+                <p>If you'd like to share your minting stories, ask questions, or collaborate, feel free to reach out:</p>
+                <p><strong>Phone:</strong> 418.376.7316</p>
+                <p class="email">urbani.luca639@gmail.com</p>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-    <!-- Fullscreen Lightbox -->
+    <!-- Lightbox -->
     <div id="lightbox">
         <span class="close-btn">×</span>
-        <img class="lightbox-content" id="lightbox-img">
+        <img id="lightbox-img" src="" alt="">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+        <div id="zoom-slider"><div id="zoom-handle"></div></div>
     </div>
 
     <footer>
         <p>© 2025 SIBALEONE Metal Minting. All rights reserved.</p>
     </footer>
 
-    <!-- Lightbox Script (fixed & working) -->
     <script>
         const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
+        const lbImg = document.getElementById('lightbox-img');
+        const lbCaption = document.getElementById('lightbox-caption');
+        const handle = document.getElementById('zoom-handle');
 
-        document.querySelectorAll('.gallery img').forEach(img => {
-            img.onclick = function() {
+        document.querySelectorAll('.photo-wrapper').forEach(wrapper => {
+            wrapper.addEventListener('click', () => {
+                const img = wrapper.querySelector('img');
+                const caption = wrapper.querySelector('.caption').textContent;
+                lbImg.src = img.src;
+                lbCaption.textContent = caption;
                 lightbox.style.display = 'block';
-                lightboxImg.src = this.src;
-            };
+            });
         });
 
-        lightbox.addEventListener('click', function(e) {
+        lightbox.addEventListener('click', e => {
             if (e.target === lightbox || e.target.classList.contains('close-btn')) {
                 lightbox.style.display = 'none';
             }
+        });
+
+        // Zoom with vertical scroller
+        let scale = 1;
+        handle.addEventListener('mousedown', e => {
+            e.preventDefault();
+            const move = ev => {
+                const rect = document.getElementById('zoom-slider').getBoundingClientRect();
+                let pos = (ev.clientY - rect.top) / rect.height;
+                pos = Math.max(0, Math.min(1, pos));
+                scale = 0.5 + pos * 3; // 50% → 350% zoom
+                lbImg.style.transform = `translate(-50%, -50%) scale(${scale})`;
+            };
+            const up = () => {
+                document.removeEventListener('mousemove', move);
+                document.removeEventListener('mouseup', up);
+            };
+            document.addEventListener('mousemove', move);
+            document.addEventListener('mouseup', up);
         });
     </script>
 </body>
