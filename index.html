@@ -3,68 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIBALEONE Metal Minting</title>
+    <title>SIBALEONE Metal Minting - Luca Urbani</title>
     <style>
         body {font-family: Arial, sans-serif; margin:0; background:#f9f5f0; color:#333; line-height:1.6;}
-        header {background:#8B4513; color:white; padding:50px; text-align:center;}
-        nav {background:#A0522D; padding:15px; text-align:center;}
-        nav a {color:white; margin:0 20px; text-decoration:none; font-weight:bold;}
-        section {padding:50px 20px; text-align:center;}
-        h1,h2 {color:#8B4513;}
+        header {background:#8B4513; color:white; padding:60px 20px; text-align:center;}
+        nav {background:#A0522D; padding:15px; text-align:center; position:sticky; top:0; z-index:1000;}
+        nav a {color:white; margin:0 20px; text-decoration:none; font-weight:bold; font-size:1.1em;}
+        section {padding:60px 20px; text-align:center;}
+        h1,h2,h3 {color:#8B4513;}
 
-        /* Gallery with caption OVER the image */
-        .gallery {display:flex; flex-wrap:wrap; gap:20px; justify-content:center; padding:20px;}
-        .photo-wrapper {position:relative; width:300px; cursor:zoom-in;}
-        .gallery img {width:100%; height:auto; border:4px solid #8B4513; border-radius:10px; transition:transform .2s;}
-        .gallery img:hover {transform:scale(1.05);}
+        /* Gallery - caption on TOP */
+        .gallery {display:flex; flex-wrap:wrap; gap:22px; justify-content:center; padding:20px;}
+        .photo-wrapper {position:relative; width:310px; cursor:zoom-in;}
+        .gallery img {width:100%; height:auto; border:5px solid #8B4513; border-radius:12px; transition:transform .2s;}
+        .gallery img:hover {transform:scale(1.04);}
         .caption {
-            position:absolute; bottom:8px; left:0; width:100%;
-            background:rgba(0,0,0,0.75); color:white; padding:10px 5px;
-            text-align:center; font-size:0.95em; font-weight:bold;
-            border-bottom-left-radius:8px; border-bottom-right-radius:8px;
+            position:absolute; top:0; left:0; width:100%;
+            background:rgba(0,0,0,0.78); color:white; padding:12px 8px;
+            font-weight:bold; font-size:0.95em; text-align:center;
+            border-top-left-radius:10px; border-top-right-radius:10px;
         }
+
+        /* Featured in About */
+        .featured {display:flex; flex-wrap:wrap; gap:30px; justify-content:center; margin-top:40px;}
+        .featured img {width:300px; height:300px; object-fit:cover; border:6px solid #8B4513; border-radius:50%;}
 
         /* Contact */
-        .contact-container {display:flex; align-items:center; justify-content:center; gap:40px; flex-wrap:wrap; max-width:900px; margin:0 auto;}
-        .contact-photo {width:220px; height:220px; border-radius:50%; object-fit:cover; border:6px solid #8B4513; box-shadow:0 4px 15px rgba(0,0,0,0.3);}
-        .email {font-size:1.5em; font-weight:bold; color:#8B4513;}
+        .contact-container {display:flex; align-items:center; justify-content:center; gap:50px; flex-wrap:wrap; max-width:1000px; margin:0 auto;}
+        .contact-photo {width:240px; height:240px; border-radius:50%; object-fit:cover; border:7px solid #8B4513; box-shadow:0 8px 25px rgba(0,0,0,0.4);}
+        .email {font-size:1.6em; font-weight:bold; color:#8B4513;}
 
-        /* Lightbox - caption over bottom of image */
-        #lightbox {display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.98); text-align:center;}
-        #lightbox-img {margin:5% auto; max-width:95%; max-height:80vh; border:6px solid #8B4513; border-radius:12px; position:relative; display:block;}
-        .close-btn {position:fixed; top:20px; right:35px; color:white; font-size:60px; font-weight:bold; cursor:pointer; z-index:10000;}
+        /* Lightbox - caption on TOP */
+        #lightbox {display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; 
+                   background:rgba(0,0,0,0.98); text-align:center; overflow:auto;}
+        #lightbox .img-container {position:relative; display:inline-block; margin:5% auto;}
+        #lightbox-img {max-width:94%; max-height:78vh; border:7px solid #8B4513; border-radius:14px;}
+        .close-btn {position:fixed; top:15px; right:30px; color:white; font-size:70px; font-weight:bold; cursor:pointer; z-index:10000;}
         .lightbox-caption {
-            position:absolute; bottom:0; left:0; width:100%;
-            background:rgba(0,0,0,0.8); color:white; padding:18px; font-size:1.4em; font-weight:bold;
-            border-bottom-left-radius:10px; border-bottom-right-radius:10px;
+            position:absolute; top:0; left:0; width:100%;
+            background:rgba(0,0,0,0.85); color:white; padding:20px; font-size:1.5em; font-weight:bold;
+            border-top-left-radius:12px; border-top-right-radius:12px;
         }
 
-        footer {background:#8B4513; color:white; padding:25px; text-align:center;}
+        footer {background:#8B4513; color:white; padding:30px; text-align:center;}
     </style>
 </head>
 <body>
 
     <header>
         <h1>SIBALEONE Metal Minting</h1>
-        <p>Explore the art of forging copper coins and bars through traditional blacksmith techniques.</p>
+        <p>Hand-forged copper coins & bars by Luca Urbani — Pure artisan fire.</p>
     </header>
 
     <nav>
         <a href="#about">About</a>
-        <a href="#photos">Photos</a>
-        <a href="#videos">Videos</a>
+        <a href="#photos">Gallery</a>
         <a href="#contact">Contact</a>
     </nav>
 
     <section id="about">
-        <h2>About SIBALEONE Metal Minting</h2>
+        <h2>About Luca Urbani — SIBALEONE</h2>
         <p>I am a blacksmith with a passion for working with metal in all its forms…</p>
+
+        <h3>Featured Work</h3>
+        <div class="featured">
+            <img src="media/13.jpg" alt="Lion Coin">
+            <img src="media/24.png" alt="Pi Network Coin">
+            <img src="media/26.jpg" alt="Baby hand & foot in metal">
+        </div>
     </section>
 
     <section id="photos">
-        <h2>Photo Gallery</h2>
+        <h2>Blacksmith process</h2>
         <div class="gallery">
-           <div class="photo-wrapper"><img src="media/1.1.jpg" alt=""><div class="caption">The fire</div></div>
+            <div class="photo-wrapper"><img src="media/1.1.jpg" alt=""><div class="caption">The fire</div></div>
             <div class="photo-wrapper"><img src="media/1.jpg" alt=""><div class="caption">Fire ready</div></div>
             <div class="photo-wrapper"><img src="media/2.1.png" alt=""><div class="caption">Raw material (copper wires top quality)</div></div>
             <div class="photo-wrapper"><img src="media/2.jpg" alt=""><div class="caption">Raw material (pipes second quality)</div></div>
@@ -109,7 +121,7 @@
     <!-- Lightbox -->
     <div id="lightbox">
         <span class="close-btn">×</span>
-        <div style="position:relative; display:inline-block;">
+        <div class="img-container">
             <img id="lightbox-img" src="" alt="">
             <div class="lightbox-caption" id="lightbox-caption"></div>
         </div>
