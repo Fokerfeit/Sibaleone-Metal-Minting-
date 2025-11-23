@@ -403,8 +403,8 @@ I confront fear as a warrior does—and each challenge hardens my spirit.</p>
            // ─────────────────────── ZOOM + PAN (mouse + touch) ───────────────────────
       lbImg.addEventListener('wheel', e => {
         e.preventDefault();
-        const delta = e.deltaY > 0 ? 0.9 : 1.1;
-        scale = Math.max(0.5, Math.min(scale * delta, 8));
+      scale *= e.deltaY > 0 ? 0.9 : 1.1;
+        scale = Math.max(0.5, Math.min(scale, 8));
         updateTransform();
       }, { passive: false });
 
