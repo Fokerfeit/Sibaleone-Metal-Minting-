@@ -66,6 +66,43 @@
 </head>
 <body>
 
+<!-- Tilt-phone hint for mobile users -->
+<div id="tilt-hint" style="
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    text-align: center;
+    background: rgba(0,0,0,0.75);
+    padding: 10px 16px;
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    display: none; /* will show only on tall/mobile screens */
+">
+    <img src="https://i.ibb.co/0jG1Y3k/tilt-phone.gif" 
+         alt="Tilt phone" 
+         style="height: 36px; vertical-align: middle; margin-right: 8px;">
+    Tilt phone for better experience
+</div>
+
+<script>
+    // Show the hint only on mobile + portrait (tall) screens
+    function checkOrientation() {
+        const hint = document.getElementById('tilt-hint');
+        if (window.innerHeight > window.innerWidth && window.innerWidth < 1000) {
+            hint.style.display = 'block';
+        } else {
+            hint.style.display = 'none';
+        }
+    }
+    window.addEventListener('resize', checkOrientation);
+    window.addEventListener('orientationchange', checkOrientation);
+    checkOrientation(); // run on load
+</script>
+
      <header style="
         background: url('media/Lion King.png') center/cover no-repeat;
         padding: 0;
