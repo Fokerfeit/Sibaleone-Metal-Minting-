@@ -2,71 +2,60 @@
 <html lang="en">
 <head>
 <style>
-.gallery img { width: 100%; height: auto; object-fit: contain; max-height: 70vh; }
+/* Contact section with photo */
+.contact-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+.contact-photo {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #8B4513;
+}
+.contact-text { text-align: center; max-width: 600px; }
+.email { font-size: 1.4em; font-weight: bold; color: #8B4513; }
+
+/* Fullscreen lightbox */
+#lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.95);
+    cursor: pointer;
+}
+#lightbox-img {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 95%;
+    max-height: 95%;
+    border: 4px solid #8B4513;
+    border-radius: 8px;
+}
+.close-btn {
+    position: absolute;
+    top: 20px; right: 30px;
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Make every gallery image clickable */
+.gallery img {
+    cursor: zoom-in;
+    transition: transform 0.2s;
+}
+.gallery img:hover { transform: scale(1.05); }
 </style>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIBALEONE Metal Minting</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        header {
-            background-color: #8B4513; /* Earthy brown for metal minting theme */
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        nav {
-            background-color: #A0522D; /* Sienna for a forged look */
-            padding: 10px;
-            text-align: center;
-        }
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        section {
-            padding: 20px;
-            margin: 20px auto;
-            max-width: 1200px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h2 {
-            color: #8B4513;
-        }
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .gallery img, .gallery video {
-            width: 300px;
-            height: auto;
-            margin: 10px;
-            border: 2px solid #A0522D;
-            border-radius: 5px;
-        }
-        footer {
-            background-color: #8B4513;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-    </style>
 </head>
 <body>
 
@@ -88,16 +77,12 @@
 Whether it’s steel, copper, brass, or something more unusual, I enjoy transforming raw materials into meaningful, durable creations. I am open to a wide variety of projects—functional, decorative, experimental—and I’m always eager to learn new techniques and explore new ideas.
 
 If you have a vision, a concept, or even just the seed of an idea, I would love to bring it to life with you.
-Feel free to reach out and let’s create something unique together.
-
-📞 418-376-7316.</p>
+Feel free to reach out and let’s create something unique together.</p>
         <p>Je suis un forgeron passionné par le travail du métal sous toutes ses formes.
 Acier, cuivre, laiton ou métaux plus rares — j’aime transformer la matière brute en créations uniques, solides et pleines de caractère. Je suis ouvert à une grande variété de projets, qu’ils soient fonctionnels, décoratifs ou expérimentaux, et je suis toujours prêt à apprendre de nouvelles techniques et à explorer de nouvelles idées.
 
 Si vous avez une vision, un concept ou même simplement une inspiration qui vous trotte en tête, je serais ravi de la concrétiser avec vous.
-Contactez-moi et créons ensemble quelque chose d’unique.
-
-📞 418-376-7316</p>
+Contactez-moi et créons ensemble quelque chose d’unique.</p>
     </section>
 
     <section id="photos">
@@ -130,9 +115,28 @@ Contactez-moi et créons ensemble quelque chose d’unique.
     </section>
 
     <section id="contact">
-        <h2>Contact</h2>
-        <p>If you'd like to share your minting stories or collaborate, reach out at: your.email@example.com</p>
-    </section>
+    <h2>Contact</h2>
+    <div class="contact-container">
+        <img src="media/9999.jpeg" alt="Luca Urbani" class="contact-photo">
+        <div class="contact-text">
+            <p>If you'd like to share your minting stories, ask questions, or collaborate, feel free to reach out:</p>
+            <p class="email">urbani.luca639@gmail.com</p>
+        </div>
+    </div>
+</section>
+
+<!-- Fullscreen Lightbox (add this once, right before the closing <script>
+document.querySelectorAll('.gallery img').forEach(img => {
+    img.onclick = function() {
+        document.getElementById('lightbox').style.display = 'block';
+        document.getElementById('lightbox-img').src = this.src;
+    }
+});
+</script></body> tag) -->
+<div id="lightbox" onclick="this.style.display='none'">
+    <span class="close-btn">×</span>
+    <img class="lightbox-content" id="lightbox-img">
+</div>
 
     <footer>
         <p>&copy; 2025 SIBALEONE Metal Minting. All rights reserved.</p>
