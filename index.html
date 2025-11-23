@@ -96,6 +96,33 @@
     }
     .rotate-btn svg{width:40px; height:40px; color:white; filter:drop-shadow(0 0 6px rgba(0,0,0,0.6))}
 
+    /* Video section styles (YouTube embed) */
+    .video-card { display:inline-block; max-width:920px; width:100%; margin:0 auto; cursor:pointer; outline:none; }
+    .video-thumb {
+      width:100%; max-width:920px; aspect-ratio:16/9;
+      background-size:cover; background-position:center;
+      border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.25);
+      display:flex; align-items:center; justify-content:center; position:relative;
+      border:5px solid var(--accent);
+    }
+    .play-btn { background:transparent; border:0; padding:0; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+    .play-btn svg { filter: drop-shadow(0 6px 18px rgba(0,0,0,0.6)); transform:translateY(0); transition:transform .12s ease; }
+
+    .video-modal {
+      display:none; position:fixed; inset:0; z-index:15000;
+      background:rgba(0,0,0,0.92);
+      align-items:center; justify-content:center; padding:24px;
+    }
+    .video-modal[aria-hidden="false"]{ display:flex; }
+
+    .video-close {
+      position:fixed; top:18px; right:22px; z-index:15010;
+      font-size:48px; color:#fff; background:transparent; border:0; cursor:pointer;
+      padding:6px; line-height:1;
+    }
+    .video-frame { width:100%; max-width:1200px; }
+    .video-caption { color:#fff; margin-top:12px; font-size:0.95rem; text-align:center; opacity:0.95; }
+
     footer{
       background:url('media/Lion Greek plus mans.png') center/cover no-repeat;
       height:380px; display:flex; flex-direction:column; justify-content:flex-end;
@@ -171,180 +198,116 @@ I confront fear as a warrior does—and each challenge hardens my spirit.</p>
       <div class="photo-wrapper"><img src="media/26.jpg" alt=""><div class="caption">Hand and feet of my newborn son in PURE METAL</div></div>
     </div>
   </section>
-  <!--
-Video section (copy-paste this entire block into your index.html where you want the video section).
-Replace the sample video src and poster with your files (or change to a YouTube embed as explained below).
--->
-<!--
-Video section (copy-paste this entire block into your index.html where you want the video section).
-Replace the sample video src and poster with your files (or change to a YouTube embed as explained below).
--->
-<section id="video" aria-labelledby="video-title" style="padding:60px 20px; text-align:center;">
-  <h2 id="video-title" style="color:#8B4513; margin-bottom:18px;">Watch the Process</h2>
 
-  <!-- Card-style thumbnail that opens the modal player -->
-  <div class="video-card" role="button" tabindex="0" aria-pressed="false" aria-label="Open video player">
-    <div class="video-thumb" style="background-image:url('media/video-poster.jpg')">
-      <button class="play-btn" aria-hidden="true">
-        <!-- Crisp SVG play icon -->
-        <svg viewBox="0 0 64 64" width="60" height="60" aria-hidden="true" focusable="false">
-          <circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.55)"/>
-          <path d="M26 20 L46 32 L26 44 z" fill="#fff"/>
-        </svg>
-      </button>
+  <!-- Video section: YouTube Short embed (opens modal and plays the short) -->
+  <section id="video" aria-labelledby="video-title" style="padding:60px 20px; text-align:center;">
+    <h2 id="video-title" style="color:#8B4513; margin-bottom:18px;">Watch the Process</h2>
+
+    <!-- Card-style thumbnail that opens the modal player -->
+    <div class="video-card" role="button" tabindex="0" aria-pressed="false" aria-label="Open video player">
+      <div class="video-thumb" style="background-image:url('media/6.jpeg')">
+        <button class="play-btn" aria-hidden="true">
+          <!-- Crisp SVG play icon -->
+          <svg viewBox="0 0 64 64" width="60" height="60" aria-hidden="true" focusable="false">
+            <circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.55)"/>
+            <path d="M26 20 L46 32 L26 44 z" fill="#fff"/>
+          </svg>
+        </button>
+      </div>
+      <figcaption style="margin-top:12px; font-weight:bold; color:#333;">Forging a Copper Coin (YouTube Short)</figcaption>
     </div>
-    <figcaption style="margin-top:12px; font-weight:bold; color:#333;">Forging a Copper Coin (short clip)</figcaption>
-  </div>
 
-  <!-- Modal / Lightbox video player (hidden by default) -->
-  <div id="video-modal" class="video-modal" aria-hidden="true" role="dialog" aria-label="Video player">
-    <button id="video-close" class="video-close" aria-label="Close video (Esc)">×</button>
+    <!-- Modal / Lightbox video player (hidden by default) -->
+    <div id="video-modal" class="video-modal" aria-hidden="true" role="dialog" aria-label="Video player">
+      <button id="video-close" class="video-close" aria-label="Close video (Esc)">×</button>
 
-    <div class="video-frame" role="document">
-      <!-- Native HTML5 player. Replace src with your MP4/WEBM file. poster is optional. -->
-      <video id="video-player" controls playsinline preload="metadata" poster="media/video-poster.jpg">
-        <source src="media/sample-video.mp4" type="video/mp4">
-        <!-- Optional WebM fallback -->
-        <source src="media/sample-video.webm" type="video/webm">
-        Your browser does not support HTML5 video. 
-        <a href="media/sample-video.mp4">Download the video</a>.
-      </video>
-      <div class="video-caption" id="video-desc">Short studio clip: heating, striking and finishing the coin.</div>
+      <div class="video-frame" role="document">
+        <div style="width:100%; max-width:1200px; aspect-ratio:16/9; margin:0 auto;">
+          <iframe id="video-iframe"
+                  src=""
+                  width="100%" height="100%"
+                  frameborder="0"
+                  allow="autoplay; encrypted-media; accelerometer; clipboard-write; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  title="Forging a Copper Coin - YouTube Short"
+                  style="width:100%; height:100%; border-radius:10px; display:block;"></iframe>
+        </div>
+
+        <div class="video-caption" id="video-desc" style="color:#fff; margin-top:12px; text-align:center; opacity:0.95;">
+          Short studio clip: heating, striking and finishing the coin.
+        </div>
+      </div>
     </div>
-  </div>
 
-  <style>
-    /* Video card / thumbnail */
-    .video-card { display:inline-block; max-width:920px; width:100%; margin:0 auto; cursor:pointer; outline:none; }
-    .video-thumb {
-      width:100%; max-width:920px; aspect-ratio:16/9;
-      background-size:cover; background-position:center;
-      border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.25);
-      display:flex; align-items:center; justify-content:center; position:relative;
-      border:5px solid #8B4513;
-    }
-    .play-btn { background:transparent; border:0; padding:0; cursor:pointer; display:flex; align-items:center; justify-content:center; }
-    .play-btn svg { filter: drop-shadow(0 6px 18px rgba(0,0,0,0.6)); transform:translateY(0); transition:transform .12s ease; }
-    .video-card:focus .play-btn svg, .video-card:hover .play-btn svg { transform:scale(1.03); }
+    <script>
+      (function(){
+        // You provided this YouTube short link: https://youtube.com/shorts/uyvbG2ZGDWg?feature=share
+        const VIDEO_ID = 'uyvbG2ZGDWg';
+        const YT_EMBED_BASE = 'https://www.youtube-nocookie.com/embed/';
 
-    /* Modal */
-    .video-modal {
-      display:none; position:fixed; inset:0; z-index:15000;
-      background:rgba(0,0,0,0.92);
-      align-items:center; justify-content:center; padding:24px;
-    }
-    .video-modal[aria-hidden="false"]{ display:flex; }
+        const card = document.querySelector('.video-card');
+        const modal = document.getElementById('video-modal');
+        const iframe = document.getElementById('video-iframe');
+        const closeBtn = document.getElementById('video-close');
 
-    .video-close {
-      position:fixed; top:18px; right:22px; z-index:15010;
-      font-size:48px; color:#fff; background:transparent; border:0; cursor:pointer;
-      padding:6px; line-height:1;
-    }
+        if (!card || !modal || !iframe) return;
 
-    .video-frame { width:100%; max-width:1200px; }
-    #video-player {
-      width:100%; height:auto; border-radius:10px; display:block;
-      box-shadow:0 14px 40px rgba(0,0,0,0.6); border:6px solid #8B4513;
-      background:#000;
-    }
-    .video-caption { color:#fff; margin-top:12px; font-size:0.95rem; text-align:center; opacity:0.95; }
-
-    /* Small screens adjustments */
-    @media (max-width:720px) {
-      .video-thumb { border-radius:10px; border-width:4px; }
-      .video-close { font-size:40px; right:12px; top:12px; }
-    }
-  </style>
-
-  <script>
-    (function(){
-      const card = document.querySelector('.video-card');
-      const modal = document.getElementById('video-modal');
-      const player = document.getElementById('video-player');
-      const closeBtn = document.getElementById('video-close');
-
-      if (!card || !modal || !player) return;
-
-      // Open modal and play
-      function openVideo() {
-        modal.style.display = 'flex';
-        modal.setAttribute('aria-hidden','false');
-        document.body.style.overflow = 'hidden';
-        // start from beginning
-        try { player.currentTime = 0; } catch(e){}
-        // autoplay politely
-        const playPromise = player.play();
-        if (playPromise !== undefined) {
-          playPromise.catch(()=>{ /* autoplay may be blocked; user can press play */ });
+        function buildSrc() {
+          // autoplay=1 attempts to start playback; playsinline=1 helps mobile inline playback
+          return `${YT_EMBED_BASE}${VIDEO_ID}?autoplay=1&modestbranding=1&rel=0&playsinline=1`;
         }
-        // on small touch devices request fullscreen for immersive experience
-        const isTouch = (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) || 'ontouchstart' in window;
-        const minDim = Math.min(window.innerWidth, window.innerHeight);
-        if (isTouch && minDim <= 820) {
-          if (modal.requestFullscreen) modal.requestFullscreen().catch(()=>{});
-          else if (modal.webkitRequestFullscreen) modal.webkitRequestFullscreen();
+
+        function openVideo() {
+          iframe.src = buildSrc();
+          modal.style.display = 'flex';
+          modal.setAttribute('aria-hidden','false');
+          document.body.style.overflow = 'hidden';
+          // On small touch devices, try fullscreen for immersive viewing
+          const isTouch = (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) || ('ontouchstart' in window);
+          const minDim = Math.min(window.innerWidth || screen.width, window.innerHeight || screen.height);
+          if (isTouch && minDim <= 820) {
+            if (modal.requestFullscreen) modal.requestFullscreen().catch(()=>{});
+            else if (modal.webkitRequestFullscreen) modal.webkitRequestFullscreen();
+          }
         }
-      }
 
-      // Close modal and pause
-      function closeVideo() {
-        modal.style.display = 'none';
-        modal.setAttribute('aria-hidden','true');
-        document.body.style.overflow = '';
-        try { player.pause(); } catch(e){}
-        // exit fullscreen if active
-        if (document.fullscreenElement || document.webkitFullscreenElement) {
-          if (document.exitFullscreen) document.exitFullscreen().catch(()=>{});
-          else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+        function closeVideo() {
+          modal.style.display = 'none';
+          modal.setAttribute('aria-hidden','true');
+          document.body.style.overflow = '';
+          // Remove src to stop playback and free resources
+          iframe.src = '';
+          if (document.fullscreenElement || document.webkitFullscreenElement) {
+            if (document.exitFullscreen) document.exitFullscreen().catch(()=>{});
+            else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+          }
         }
-      }
 
-      // Attach handlers (click + keyboard accessibility)
-      card.addEventListener('click', openVideo);
-      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openVideo(); }});
+        card.addEventListener('click', openVideo);
+        card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openVideo(); }});
+        closeBtn.addEventListener('click', closeVideo);
 
-      closeBtn.addEventListener('click', closeVideo);
-      modal.addEventListener('click', e => {
-        // close when clicking outside the player area
-        const frame = e.target.closest('.video-frame');
-        if (!frame) closeVideo();
-      });
+        // Close when clicking outside the video frame
+        modal.addEventListener('click', e => {
+          const frame = e.target.closest('.video-frame');
+          if (!frame) closeVideo();
+        });
 
-      // Keyboard support while modal open
-      document.addEventListener('keydown', e => {
-        if (modal.getAttribute('aria-hidden') === 'true') return;
-        if (e.key === 'Escape') closeVideo();
-        if (e.key === ' ' || e.code === 'Space') {
-          // Toggle play/pause
-          e.preventDefault();
-          if (player.paused) player.play().catch(()=>{});
-          else player.pause();
-        }
-        if (e.key === 'ArrowLeft') { player.currentTime = Math.max(0, player.currentTime - 5); }
-        if (e.key === 'ArrowRight') { player.currentTime = Math.min(player.duration || Infinity, player.currentTime + 5); }
-      });
+        // Keyboard support while modal open
+        document.addEventListener('keydown', e => {
+          if (modal.getAttribute('aria-hidden') === 'true') return;
+          if (e.key === 'Escape') closeVideo();
+        });
 
-      // When video ends, exit modal (optional - comment out if you prefer to keep it open)
-      player.addEventListener('ended', () => {
-        // closeVideo();
-      });
-
-      // Prevent scrolling/pinch on modal background on touch devices
-      modal.addEventListener('touchmove', e => {
-        // allow the player itself to receive touch gestures; prevent background scrolling
-        const isInside = !!e.target.closest('.video-frame');
-        if (!isInside) e.preventDefault();
-      }, { passive:false });
-
-      // Small helper: if user navigates away from modal while in fullscreen, ensure styles are reset
-      document.addEventListener('fullscreenchange', () => {
-        if (!document.fullscreenElement && modal.getAttribute('aria-hidden') === 'false') {
-          // keep modal open, but nothing else to do
-        }
-      });
-    })();
-  </script>
-</section>
+        // Defensive: clear src when tab hidden to stop playback
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden && modal.getAttribute('aria-hidden') === 'false') {
+            iframe.src = '';
+          }
+        });
+      })();
+    </script>
+  </section>
 
   <section id="contact">
     <h2>Contact</h2>
