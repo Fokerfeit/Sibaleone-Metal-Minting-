@@ -1,0 +1,141 @@
+:root{
+  --bg: rgba(0,0,0,0.95);
+  --ui-size: 56px;
+  --ui-padding: 16px;
+  --arrow-color: #fff;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:#111;
+  color:#fff;
+  min-height:100vh;
+  padding:24px;
+}
+
+/* Simple gallery layout */
+.gallery{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  align-items:flex-start;
+}
+.thumb{
+  width:220px;
+  height:140px;
+  object-fit:cover;
+  cursor:pointer;
+  border-radius:6px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.6);
+  transition:transform .12s ease;
+}
+.thumb:active{transform:scale(.985);}
+
+/* Lightbox overlay - instant open */
+.lightbox{
+  display:none; /* toggled via JS */
+  position:fixed;
+  inset:0;
+  background:var(--bg);
+  z-index:1000;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+/* shown state */
+.lightbox[aria-hidden="false"]{
+  display:flex;
+}
+
+/* Close button */
+.close{
+  position:fixed;
+  right:12px;
+  top:12px;
+  background:transparent;
+  color: #fff;
+  font-size:40px;
+  line-height:1;
+  border:0;
+  padding:8px;
+  cursor:pointer;
+  z-index:1010;
+  opacity:.95;
+}
+
+/* Frame centers the image */
+.frame{
+  max-width:100%;
+  max-height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  height:100%;
+  padding: var(--ui-padding);
+}
+
+/* The displayed image is responsive */
+#lb-image{
+  max-width:100%;
+  max-height:100%;
+  width:auto;
+  height:auto;
+  transform-origin:center center;
+  transition:transform .12s linear;
+}
+
+/* Nav arrows */
+.nav.arrow{
+  position:fixed;
+  top:50%;
+  transform:translateY(-50%);
+  width:var(--ui-size);
+  height:var(--ui-size);
+  background:transparent;
+  border:0;
+  color:var(--arrow-color);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  z-index:1010;
+  padding:8px;
+}
+.nav.arrow.left{ left:8px; }
+.nav.arrow.right{ right:8px; }
+
+/* Make SVG arrows bigger and crisp */
+.nav.arrow svg{ width:40px; height:40px; filter:drop-shadow(0 2px 6px rgba(0,0,0,.7)); }
+
+/* Rotate button with GIF */
+.rotate{
+  position:fixed;
+  right:12px;
+  bottom:12px;
+  width:56px;
+  height:56px;
+  border-radius:8px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.06);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1010;
+  padding:6px;
+  cursor:pointer;
+}
+.rotate img{ width:40px; height:40px; object-fit:contain; }
+
+/* Accessibility focus states */
+.close:focus,.nav.arrow:focus,.rotate:focus{ outline:2px solid rgba(255,255,255,.16); outline-offset:4px; }
+
+/* Small-screen adjustments */
+@media (max-width:520px){
+  .thumb{width:46vw;height:28vw}
+  .nav.arrow{ display:flex; width:44px; height:44px; }
+  .rotate{ width:48px;height:48px }
+}
