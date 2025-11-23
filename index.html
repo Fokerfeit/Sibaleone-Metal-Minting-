@@ -8,17 +8,16 @@
         body {font-family: Arial, sans-serif; margin:0; background:#f9f5f0; color:#333; line-height:1.6;}
         * {box-sizing:border-box;}
 
-        /* HEADER - Perfect on all devices */
         header {
             background: url('media/Lion Header.jpg') center/cover no-repeat;
-            height: 100dvh; min-height: 1050px;
+            height: 100dvh; min-height: 620px;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             position: relative; padding: 20px; text-align: center;
         }
         header::before {content:''; position:absolute; inset:0; background:rgba(0,0,0,0.62);}
         header > div {position:relative; z-index:2; color:white; max-width:95%;}
         header h1 {font-size: clamp(3.2rem, 11vw, 7rem); margin:0 0 20px; text-shadow:4px 4px 20px #000; letter-spacing:3px;}
-        header p {font-size: clamp(1.4rem, 4.5vw, 2.3rem); text-shadow:3px 3px 15px #000; letter-spacing:1.5px; margin:0;}
+        header p {font-size: clamp(1.4rem, 4.5vw, 2.3rem); text-shadow:3px 3px 15px #000; letter-spacing:1.5px;}
 
         nav {background:#A0522D; padding:15px; text-align:center; position:sticky; top:0; z-index:1000;}
         nav a {color:white; margin:0 20px; text-decoration:none; font-weight:bold; font-size:1.1em;}
@@ -47,19 +46,19 @@
         .contact-photo {width:240px; height:240px; border-radius:50%; object-fit:cover; border:7px solid #8B4513; box-shadow:0 8px 25px rgba(0,0,0,0.4);}
         .email {font-size:1.6em; font-weight:bold; color:#8B4513;}
 
-        /* LIGHTBOX - TRUE FULLSCREEN */
+        /* LIGHTBOX */
         #lightbox {
             display:none; position:fixed; inset:0; z-index:9999;
-            background:rgba(0,0,0,0.98); overflow:hidden;
+            background:rgba(0,0,0,0.98); overflow:hidden; justify-content:center; align-items:center;
             cursor:grab;
         }
         #lightbox.dragging {cursor:grabbing;}
-        #lightbox img {
-            position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) translate(var(--pan-x,0px), var(--pan-y,0px)) scale(var(--scale,1));
+        #lightbox-img {
             max-width:95vw; max-height:95vh;
             border:7px solid #8B4513; border-radius:14px;
             box-shadow:0 0 40px rgba(0,0,0,0.9);
             user-select:none; touch-action:none;
+            transform: translate(var(--pan-x,0px), var(--pan-y,0px)) scale(var(--scale,1));
             transition:none;
         }
         .close-btn {
@@ -75,17 +74,17 @@
         .prev-arrow {left:20px;}
         .next-arrow {right:20px;}
 
-        /* BEAUTIFUL rotate hint - clean & explicit */
+        /* NEW beautiful rotate GIF */
         #tilt-hint {
             position:fixed; bottom:30px; left:50%; transform:translateX(-50%);
-            z-index:9999; background:rgba(0,0,0,0.85); padding:16px 32px;
-            border-radius:50px; box-shadow:0 10px 35px rgba(0,0,0,0.7);
-            backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.15);
-            display:none; align-items:center; gap:16px;
+            z-index:9999; background:rgba(0,0,0,0.9); padding:18px 36px;
+            border-radius:60px; box-shadow:0 10px 40px rgba(0,0,0,0.8);
+            backdrop-filter:blur(15px); border:2px solid rgba(255,255,255,0.2);
+            display:none; align-items:center; gap:18px;
             animation:float 3s ease-in-out infinite;
         }
-        #tilt-hint img {height:48px;}
-        @keyframes float {0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-12px)}}
+        #tilt-hint img {height:55px; filter:drop-shadow(0 0 10px white);}
+        @keyframes float {0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-15px)}}
 
         footer {
             background:url('media/Lion Greek plus mans.png') center/cover no-repeat;
@@ -98,9 +97,9 @@
 </head>
 <body>
 
-<!-- Clean & explicit rotate hint -->
+<!-- NEW explicit rotate GIF -->
 <div id="tilt-hint">
-    <img src="https://i.ibb.co/2dK9Y3W/rotate-phone-clean.gif" alt="Rotate phone">
+    <img src="https://i.ibb.co.com/9bK8nYc/rotate-phone-modern.gif" alt="Rotate phone">
 </div>
 
 <script>
@@ -159,13 +158,13 @@
         <div class="photo-wrapper"><img src="media/8.jpg" alt=""><div class="caption">Gently buffing Gold bar</div></div>
         <div class="photo-wrapper"><img src="media/10.1.jpeg" alt=""><div class="caption">Copper Marvel</div></div>
         <div class="photo-wrapper"><img src="media/10.jpeg" alt=""><div class="caption">Copper Marvel (Close-up)</div></div>
-        <div class="photo-wrapper"><img src="media/11.1.jpeg" alt=""><div class="caption">All unique art pieces</div></div>
+        <div class="photo-wrapper"><img src="media/11.1.jpeg" alt=""><div class="caption">All unique art pieces</</div></div>
         <div class="photo-wrapper"><img src="media/12.jpeg" alt=""><div class="caption">Coin ready for shipping</div></div>
         <div class="photo-wrapper"><img src="media/13.1.jpg" alt=""><div class="caption">Weighting the coin</div></div>
         <div class="photo-wrapper"><img src="media/13.jpg" alt=""><div class="caption">Bars and coins ready for inspection</div></div>
         <div class="photo-wrapper"><img src="media/18.jpg" alt=""><div class="caption">Raising the bar</div></div>
         <div class="photo-wrapper"><img src="media/19.jpeg" alt=""><div class="caption">Metal stamp</div></div>
-        <div class="photo-wrapper"><img src="media/20.jpeg" alt=""><div class="caption">Buisness card</div></div>
+        <div class="photo-wrapper"><img src="media/20.jpeg" alt=""><div class="caption">Business card</div></div>
         <div class="photo-wrapper"><img src="media/22.jpg" alt=""><div class="caption">Bars ready for selling</div></div>
         <div class="photo-wrapper"><img src="media/23.png" alt=""><div class="caption">Contract for Pi Network DONE</div></div>
         <div class="photo-wrapper"><img src="media/24.png" alt=""><div class="caption">Pi Network coin (made in 2024)</div></div>
@@ -205,105 +204,106 @@
 <script>
     const lightbox = document.getElementById('lightbox');
     const lbImg = document.getElementById('lightbox-img');
-    const allPhotos = [...document.querySelectorAll('.photo-wrapper img')];
-    let currentIndex = 0;
+    const photos = document.querySelectorAll('.photo-wrapper');
+    let current = 0;
 
-    // Pan & zoom variables
-    let scale = 1, panX = 0, panY = 0;
-    let isDragging = false, startX, startY;
+    // Open lightbox
+    photos.forEach((wrapper, i) => {
+        wrapper.style.cursor = 'zoom-in';
+        wrapper.addEventListener('click', () => {
+            current = i;
+            lbImg.src = wrapper.querySelector('img').src;
+            lbImg.style.setProperty('--scale', 1);
+            lbImg.style.setProperty('--pan-x', 0);
+            lbImg.style.setProperty('--pan-y', 0);
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+    });
 
-    function updateTransform() {
-        lbImg.style.setProperty('--scale', scale);
-        lbImg.style.setProperty('--pan-x', panX + 'px');
-        lbImg.style.setProperty('--pan-y', panY + 'px');
-    }
-
-    function openLightbox(i) {
-        currentIndex = i;
-        lbImg.src = allPhotos[i].src;
-        scale = 1; panX = 0; panY = 0;
-        updateTransform();
-        lightbox.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeLightbox() {
-        lightbox.style.display = 'none';
-        document.body.style.overflow = '';
-    }
-
-    allPhotos.forEach((img, i) => img.closest('.photo-wrapper').addEventListener('click', () => openLightbox(i)));
-
+    // Close
     lightbox.addEventListener('click', e => {
-        if (e.target === lightbox || e.target.classList.contains('close-btn')) closeLightbox();
+        if (e.target === lightbox || e.target.classList.contains('close-btn')) {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = '';
+        }
     });
 
+    // Navigation
+    document.querySelector('.prev-arrow').onclick = () => {
+        current = (current - 1 + photos.length) % photos.length;
+        lbImg.src = photos[current].querySelector('img').src;
+    };
+    document.querySelector('.next-arrow').onclick = () => {
+        current = (current + 1) % photos.length;
+        lbImg.src = photos[current].querySelector('img').src;
+    };
+
+    // Keyboard
     document.addEventListener('keydown', e => {
-        if (lightbox.style.display !== 'block') return;
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowLeft') openLightbox((currentIndex - 1 + allPhotos.length) % allPhotos.length);
-        if (e.key === 'ArrowRight') openLightbox((currentIndex + 1) % allPhotos.length);
+        if (lightbox.style.display === 'flex') {
+            if (e.key === 'Escape') lightbox.style.display = 'none';
+            if (e.key === 'ArrowLeft') document.querySelector('.prev-arrow').click();
+            if (e.key === 'ArrowRight') document.querySelector('.next-arrow').click();
+        }
     });
 
-    document.querySelector('.prev-arrow').addEventListener('click', () => openLightbox((currentIndex - 1 + allPhotos.length) % allPhotos.length));
-    document.querySelector('.next-arrow').addEventListener('click', () => openLightbox((currentIndex + 1) % allPhotos.length));
+    // Zoom & Pan
+    let scale = 1, panX = 0, panY = 0, isDragging = false, startX, startY;
 
-    // Zoom & Pan (mouse + touch) – works at ANY zoom level
-    lightbox.addEventListener('wheel', e => {
+    lbImg.onwheel = e => {
         e.preventDefault();
         scale *= e.deltaY > 0 ? 0.9 : 1.1;
         scale = Math.max(0.5, Math.min(scale, 8));
-        updateTransform();
-    });
+        lbImg.style.setProperty('--scale', scale);
+    };
 
-    lbImg.addEventListener('mousedown', e => {
+    lbImg.onmousedown = e => {
         e.preventDefault();
         isDragging = true;
         startX = e.clientX - panX;
         startY = e.clientY - panY;
         lightbox.classList.add('dragging');
-    });
+    };
 
-    document.addEventListener('mousemove', e => {
+    document.onmousemove = e => {
         if (!isDragging) return;
         panX = e.clientX - startX;
         panY = e.clientY - startY;
-        updateTransform();
-    });
+        lbImg.style.setProperty('--pan-x', panX + 'px');
+        lbImg.style.setProperty('--pan-y', panY + 'px');
+    };
 
-    document.addEventListener('mouseup', () => {
+    document.onmouseup = () => {
         isDragging = false;
         lightbox.classList.remove('dragging');
-    });
+    };
 
     // Touch support
-    let startDist = 0, startScale = 1;
-    lightbox.addEventListener('touchstart', e => {
+    let startDist = 0;
+    lightbox.ontouchstart = e => {
         if (e.touches.length === 2) {
-            e.preventDefault();
             startDist = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
-            startScale = scale;
         } else if (e.touches.length === 1) {
-            e.preventDefault();
-            startX = e.touches[0].pageX - panX;
-            startY = e.touches[0].pageY - panY;
+            startX = e.touches[0].clientX - panX;
+            startY = e.touches[0].clientY - panY;
         }
-    }, {passive:false});
+    };
 
-    lightbox.addEventListener('touchmove', e => {
+    lightbox.ontouchmove = e => {
+        e.preventDefault();
         if (e.touches.length === 2) {
-            e.preventDefault();
             const dist = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
-            scale = startScale * (dist / startDist);
+            scale = scale * (dist / startDist);
             scale = Math.max(0.5, Math.min(scale, 8));
-            updateTransform();
+            lbImg.style.setProperty('--scale', scale);
         } else if (e.touches.length === 1) {
-            e.preventDefault();
-            panX = e.touches[0].pageX - startX;
-            panY = e.touches[0].pageY - startY;
-            updateTransform();
+            panX = e.touches[0].clientX - startX;
+            panY = e.touches[0].clientY - startY;
+            lbImg.style.setProperty('--pan-x', panX + 'px');
+            lbImg.style.setProperty('--pan-y', panY + 'px');
         }
-    }, {passive:false});
+    };
 </script>
 </body>
 </html>
