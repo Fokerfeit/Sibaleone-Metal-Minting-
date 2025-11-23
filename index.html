@@ -369,19 +369,19 @@ I confront fear as a warrior does—and each challenge hardens my spirit.</p>
     </button>
 
     <!-- rotate control: replaced GIF with crisp SVG so no GIFs remain on site -->
-   <button class="rotate-btn" id="lb-rotate" aria-label="Rotate image (R)" title="Rotate 90°">
-  <svg viewBox="0 0 64 64" width="40" height="40" aria-hidden="true">
-    <!-- Gold ingot -->
-    <rect x="12" y="18" width="40" height="28" rx="4" ry="4"
-          fill="#D4AF37" stroke="#B8860B" stroke-width="3"/>
+<!-- GOLD INGOT rotate button – 100% working version -->
+<button class="rotate-btn" id="lb-rotate" aria-label="Rotate image (R)" title="Rotate 90°">
+  <svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true">
+    <!-- Main gold body -->
+    <rect x="12" y="18" width="40" height="28" rx="4" fill="#D4AF37" stroke="#B8860B" stroke-width="3"/>
     <!-- Top shine -->
-    <path d="M16 22 L28 22 L48 22 L48 30 L16 30 Z" fill="#E8C66A"/>
-    <!-- Side highlight -->
-    <path d="M52 20 L56 22 L56 44 L52 46 Z" fill="#E8C66A" opacity="0.7"/>
+    <path d="M16 22 L48 22 L48 30 L16 30 Z" fill="#E8C66A"/>
+    <!-- Right-side bevel highlight -->
+    <path d="M52 20 L56 22 L56 44 L52 46 Z" fill="#E8C66A" opacity="0.75"/>
     <!-- Bottom shadow -->
     <path d="M12 46 L52 46 L48 42 L16 42 Z" fill="#B8860B" opacity="0.6"/>
-    <!-- Tiny SIBALEONE stamp -->
-    <text x="32" y="36" font-family="Arial Black, sans-serif" font-size="11"
+    <!-- Tiny SIBALEONE stamp (optional – remove if you don’t want it) -->
+    <text x="32" y="36" font-family="Arial Black, sans-serif" font-size="11" 
           fill="#8B4513" text-anchor="middle" font-weight="bold">S1</text>
   </svg>
 </button>
