@@ -6,52 +6,12 @@
     <title>SIBALEONE Metal Minting - Luca Urbani</title>
     <style>
         body {font-family: Arial, sans-serif; margin:0; background:#f9f5f0; color:#333; line-height:1.6;}
-        header, nav, section, footer {box-sizing:border-box;}
-
-        /* ===== HEADER - Perfect on mobile landscape too ===== */
-        header {
-            background: url('media/Lion Header.jpg') center/cover no-repeat;
-            height: 100vh;
-            min-height: 600px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            text-align: center;
-            padding: 20px;
-        }
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.62);
-        }
-        header > div {
-            position: relative;
-            z-index: 2;
-            color: white;
-            max-width: 90%;
-        }
-        header h1 {
-            font-size: clamp(3rem, 10vw, 6rem);
-            margin: 0 0 20px 0;
-            text-shadow: 4px 4px 20px rgba(0,0,0,0.9);
-            letter-spacing: 3px;
-        }
-        header p {
-            font-size: clamp(1.2rem, 4vw, 2rem);
-            text-shadow: 3px 3px 12px rgba(0,0,0,0.9);
-            letter-spacing: 1.5px;
-            margin: 0;
-        }
-
+        header {background:#8B4513; color:white; padding:60px 20px; text-align:center;}
         nav {background:#A0522D; padding:15px; text-align:center; position:sticky; top:0; z-index:1000;}
         nav a {color:white; margin:0 20px; text-decoration:none; font-weight:bold; font-size:1.1em;}
         section {padding:60px 20px; text-align:center;}
         h1,h2,h3 {color:#8B4513;}
 
-        /* Gallery */
         .gallery {display:flex; flex-wrap:wrap; gap:22px; justify-content:center; padding:20px;}
         .photo-wrapper {position:relative; width:310px; cursor:zoom-in;}
         .gallery img {width:100%; height:auto; border:5px solid #8B4513; border-radius:12px; transition:transform .2s;}
@@ -76,11 +36,12 @@
 
         /* LIGHTBOX */
         #lightbox {
-            display:none; position:fixed; z-index:9999; inset:0;
+            display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%;
             background:rgba(0,0,0,0.98); overflow:hidden;
             cursor:grab;
         }
         #lightbox.dragging {cursor:grabbing;}
+
         #lightbox .img-container {
             position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
             user-select:none; touch-action:none;
@@ -89,6 +50,7 @@
             max-width:95vw; max-height:95vh;
             border:7px solid #8B4513; border-radius:14px;
             box-shadow:0 0 40px rgba(0,0,0,0.9);
+            transition:none;
         }
         .close-btn {
             position:fixed; top:15px; right:30px; color:white; font-size:70px;
@@ -96,69 +58,41 @@
         }
         .nav-arrow {
             position:fixed; top:50%; transform:translateY(-50%);
-            color:white; font-size:80px; cursor:pointer;
+            color:white; font-size:80px; cursor:pointer; user-select:none;
             z-index:10000; opacity:0.7; font-weight:bold;
         }
         .nav-arrow:hover {opacity:1;}
         .prev-arrow {left:20px;}
         .next-arrow {right:20px;}
 
-        /* Elegant tilt hint - clean & professional */
-        #tilt-hint {
-            position:fixed;
-            bottom:30px; left:50%; transform:translateX(-50%);
-            z-index:9999; background:rgba(0,0,0,0.75);
-            padding:14px 24px; border-radius:50px;
-            box-shadow:0 8px 25px rgba(0,0,0,0.5);
-            display:none; animation: pulse 2s infinite;
-        }
-        #tilt-hint img {height:40px; vertical-align:middle; margin-right:12px;}
-        #tilt-hint span {color:white; font-weight:bold; font-size:1.1em;}
+        .lightbox-caption {display:none !important;}
 
-        @keyframes pulse {
-            0%, 100% {transform:translateX(-50%) scale(1);}
-            50% {transform:translateX(-50%) scale(1.05);}
-        }
-
-        footer {
-            background:url('media/Lion Greek plus mans.png') center/cover no-repeat;
-            height:380px; display:flex; flex-direction:column;
-            justify-content:flex-end; position:relative; color:white;
-        }
-        footer::before {content:''; position:absolute; inset:0; background:rgba(0,0,0,0.68);}
-        footer > div {
-            position:relative; z-index:2; text-align:center; padding:30px;
-            background:rgba(139,69,19,0.75);
-        }
+        footer {background:#8B4513; color:white; padding:30px; text-align:center;}
     </style>
 </head>
 <body>
 
-<!-- Elegant tilt hint -->
-<div id="tilt-hint">
-    <img src="https://i.ibb.co/7zN0Y3k/rotate-phone.gif" alt="Rotate">
-    <span>Rotate for best view</span>
+<div id="tilt-hint" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:9999;text-align:center;background:rgba(0,0,0,0.75);padding:10px 16px;border-radius:50px;color:white;font-weight:bold;box-shadow:0 4px 15px rgba(0,0,0,0.5);display:none;">
+    <img src="https://i.ibb.co/0jG1Y3k/tilt-phone.gif" alt="Tilt phone" style="height:36px;vertical-align:middle;margin-right:8px;">
+    Tilt phone for better experience
 </div>
 
 <script>
     function checkOrientation() {
         const hint = document.getElementById('tilt-hint');
-        if (window.innerHeight > window.innerWidth && window.innerWidth < 1000) {
-            hint.style.display = 'flex';
-            hint.style.alignItems = 'center';
-        } else {
-            hint.style.display = 'none';
-        }
+        if (window.innerHeight > window.innerWidth && window.innerWidth < 1000) hint.style.display = 'block';
+        else hint.style.display = 'none';
     }
     window.addEventListener('resize', checkOrientation);
     window.addEventListener('orientationchange', checkOrientation);
     checkOrientation();
 </script>
 
-<header>
-    <div>
-        <h1>SIBALEONE Metal Minting</h1>
-        <p>Hand-forged copper coins & bars by Luca Urbani — Pure artisan fire.</p>
+<header style="background:url('media/Lion Header.jpg') center/cover no-repeat;padding:0;height:1050px;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;margin:0;">
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,0.58);"></div>
+    <div style="position:relative;z-index:2;text-align:center;color:white;">
+        <h1 style="font-size:5.5rem;margin:0;text-shadow:4px 4px 15px #000;letter-spacing:3px;">SIBALEONE Metal Minting</h1>
+        <p style="font-size:1.9rem;margin:15px 0 0;text-shadow:3px 3px 10px #000;letter-spacing:1.5px;">Hand-forged copper coins & bars by Luca Urbani — Pure artisan fire.</p>
     </div>
 </header>
 
@@ -168,11 +102,63 @@
     <a href="#contact">Contact</a>
 </nav>
 
-<!-- Rest of your content (About, Gallery, Contact) stays exactly the same -->
-<section id="about"> ... </section>
-<section id="photos"> ... </section>
-<section id="contact"> ... </section>
+<section id="about">
+    <h2>About Luca Urbani — SIBALEONE</h2>
+    <p>I am a blacksmith with a passion for working with metal in all its forms…</p>
+    <h3>Featured work</h3>
+    <div class="featured">
+        <div class="photo-wrapper" data-caption="SIBALEONE Lion Coin"><img src="media/13.jpg" alt=""></div>
+        <div class="photo-wrapper" data-caption="Pi Network Coin (2024)"><img src="media/26.jpg" alt=""></div>
+        <div class="photo-wrapper" data-caption="Hand and feet of my newborn son in PURE METAL"><img src="media/24.png" alt=""></div>
+    </div>
+</section>
 
+<section id="photos">
+    <h2>The recycling of metal</h2>
+    <div class="gallery">
+        <div class="photo-wrapper"><img src="media/1.1.jpg" alt=""><div class="caption">The fire</div></div>
+        <div class="photo-wrapper"><img src="media/1.jpg" alt=""><div class="caption">Fire ready</div></div>
+        <div class="photo-wrapper"><img src="media/2.1.png" alt=""><div class="caption">Raw material (copper wires top quality)</div></div>
+        <div class="photo-wrapper"><img src="media/2.jpg" alt=""><div class="caption">Raw material (pipes second quality)</div></div>
+        <div class="photo-wrapper"><img src="media/4.jpg" alt=""><div class="caption">Crucible cooling out of gas :(</div></div>
+        <div class="photo-wrapper"><img src="media/5.jpeg" alt=""><div class="caption">Heating pipes to remove contaminants</div></div>
+        <div class="photo-wrapper"><img src="media/6.jpeg" alt=""><div class="caption">Inspecting the GOODS</div></div>
+        <div class="photo-wrapper"><img src="media/7.1.jpeg" alt=""><div class="caption">Copper coins after striking (not polished yet)</div></div>
+        <div class="photo-wrapper"><img src="media/7.jpeg" alt=""><div class="caption">Copper bars before polishing</div></div>
+        <div class="photo-wrapper"><img src="media/8.1.jpeg" alt=""><div class="caption">Close-up detail after polishing</div></div>
+        <div class="photo-wrapper"><img src="media/8.2.jpg" alt=""><div class="caption">Grabbing the goods</div></div>
+        <div class="photo-wrapper"><img src="media/8.3.jpeg" alt=""><div class="caption">Copper and Gold</div></div>
+        <div class="photo-wrapper"><img src="media/8.jpg" alt=""><div class="caption">Gently buffing Gold bar</div></div>
+        <div class="photo-wrapper"><img src="media/10.1.jpeg" alt=""><div class="caption">Copper Marvel</div></div>
+        <div class="photo-wrapper"><img src="media/10.jpeg" alt=""><div class="caption">Copper Marvel (Close-up)</div></div>
+        <div class="photo-wrapper"><img src="media/11.1.jpeg" alt=""><div class="caption">All unique art pieces</div></div>
+        <div class="photo-wrapper"><img src="media/12.jpeg" alt=""><div class="caption">Coin ready for shipping</div></div>
+        <div class="photo-wrapper"><img src="media/13.1.jpg" alt=""><div class="caption">Weighting the coin</div></div>
+        <div class="photo-wrapper"><img src="media/13.jpg" alt=""><div class="caption">Bars and coins ready for inspection</div></div>
+        <div class="photo-wrapper"><img src="media/18.jpg" alt=""><div class="caption">Raising the bar</div></div>
+        <div class="photo-wrapper"><img src="media/19.jpeg" alt=""><div class="caption">Metal stamp</div></div>
+        <div class="photo-wrapper"><img src="media/20.jpeg" alt=""><div class="caption">Buisness card</div></div>
+        <div class="photo-wrapper"><img src="media/22.jpg" alt=""><div class="caption">Bars ready for selling</div></div>
+        <div class="photo-wrapper"><img src="media/23.png" alt=""><div class="caption">Contract for Pi Network DONE</div></div>
+        <div class="photo-wrapper"><img src="media/24.png" alt=""><div class="caption">Pi Network coin (made in 2024)</div></div>
+        <div class="photo-wrapper"><img src="media/25.jpg" alt=""><div class="caption">Methodology for Pi project</div></div>
+        <div class="photo-wrapper"><img src="media/26.jpg" alt=""><div class="caption">Hand and feet of my newborn son in PURE METAL</div></div>
+    </div>
+</section>
+
+<section id="contact">
+    <h2>Contact</h2>
+    <div class="contact-container">
+        <img src="media/Luca.jpg" alt="Luca Urbani" class="contact-photo">
+        <div class="contact-text">
+            <p>If you'd like to share your minting stories, ask questions, or collaborate, feel free to reach out:</p>
+            <p><strong>Phone:</strong> 418.376.7316</p>
+            <p class="email">urbani.luca639@gmail.com</p>
+        </div>
+    </div>
+</section>
+
+<!-- Lightbox -->
 <div id="lightbox">
     <span class="close-btn">×</span>
     <span class="nav-arrow prev-arrow">Left Arrow</span>
@@ -182,9 +168,12 @@
     </div>
 </div>
 
-<footer>
-    <div>
-        <p>© 2025 SIBALEONE Metal Minting — Hand-forged by Luca Urbani<br>All rights reserved</p>
+<footer style="background:url('media/Lion Greek plus mans.png') center/cover no-repeat;padding:0;height:380px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;position:relative;color:white;">
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,0.68);"></div>
+    <div style="position:relative;z-index:2;text-align:center;padding:30px;width:100%;background:rgba(139,69,19,0.75);">
+        <p style="margin:0;font-size:1.1rem;font-weight:bold;text-shadow:2px 2px 8px #000;">
+            © 2025 SIBALEONE Metal Minting — Hand-forged by Luca Urbani<br>All rights reserved
+        </p>
     </div>
 </footer>
 
@@ -195,6 +184,8 @@
     const nextBtn = document.querySelector('.next-arrow');
     const allPhotos = [...document.querySelectorAll('.photo-wrapper')];
     let currentIndex = 0;
+
+    // Pan & zoom
     let scale = 1;
     let posX = 0, posY = 0;
     let isDragging = false;
@@ -212,23 +203,27 @@
         lightbox.style.display = 'block';
     }
 
+    function closeLightbox() { lightbox.style.display = 'none'; }
+    function showPrev() { currentIndex = (currentIndex - 1 + allPhotos.length) % allPhotos.length; openLightbox(currentIndex); }
+    function showNext() { currentIndex = (currentIndex + 1) % allPhotos.length; openLightbox(currentIndex); }
+
     allPhotos.forEach((el, i) => el.addEventListener('click', () => openLightbox(i)));
 
     lightbox.addEventListener('click', e => {
-        if (e.target === lightbox || e.target.classList.contains('close-btn')) lightbox.style.display = 'none';
+        if (e.target === lightbox || e.target.classList.contains('close-btn')) closeLightbox();
     });
 
     document.addEventListener('keydown', e => {
         if (lightbox.style.display !== 'block') return;
-        if (e.key === 'Escape') lightbox.style.display = 'none';
-        if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + allPhotos.length) % allPhotos.length; openLightbox(currentIndex); }
-        if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % allPhotos.length; openLightbox(currentIndex); }
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') showPrev();
+        if (e.key === 'ArrowRight') showNext();
     });
 
-    prevBtn.addEventListener('click', () => { currentIndex = (currentIndex - 1 + allPhotos.length) % allPhotos.length; openLightbox(currentIndex); });
-    nextBtn.addEventListener('click', () => { currentIndex = (currentIndex + 1) % allPhotos.length; openLightbox(currentIndex); });
+    prevBtn.addEventListener('click', showPrev);
+    nextBtn.addEventListener('click', showNext);
 
-    // Zoom & Pan (works at any zoom level)
+    // Mouse wheel zoom
     lightbox.addEventListener('wheel', e => {
         e.preventDefault();
         scale *= e.deltaY > 0 ? 0.9 : 1.1;
@@ -236,6 +231,7 @@
         updateTransform();
     });
 
+    // Desktop drag — works even at 1× zoom
     lbImg.addEventListener('mousedown', e => {
         e.preventDefault();
         isDragging = true;
@@ -256,8 +252,9 @@
         lightbox.classList.remove('dragging');
     });
 
-    // Touch support
+    // Touch drag (always works) + pinch zoom
     let startDist = 0, startScale = 1;
+
     lightbox.addEventListener('touchstart', e => {
         if (e.touches.length === 2) {
             e.preventDefault();
