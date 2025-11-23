@@ -5,69 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIBALEONE Metal Minting</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; background: #f9f5f0; color: #333; line-height: 1.6; }
-        header { background: #8B4513; color: white; padding: 50px; text-align: center; }
-        nav { background: #A0522D; padding: 15px; text-align: center; }
-        nav a { color: white; margin: 0 20px; text-decoration: none; font-weight: bold; }
-        section { padding: 50px 20px; text-align: center; }
-        h1, h2 { color: #8B4513; }
+        body {font-family: Arial, sans-serif; margin:0; background:#f9f5f0; color:#333; line-height:1.6;}
+        header {background:#8B4513; color:white; padding:50px; text-align:center;}
+        nav {background:#A0522D; padding:15px; text-align:center;}
+        nav a {color:white; margin:0 20px; text-decoration:none; font-weight:bold;}
+        section {padding:50px 20px; text-align:center;}
+        h1,h2 {color:#8B4513;}
 
-        /* Gallery + Captions */
-        .gallery {
-            display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding: 20px;
-        }
-        .photo-wrapper {
-            position: relative; width: 300px;
-        }
-        .gallery img {
-            width: 100%; height: auto; border: 4px solid #8B4513; border-radius: 10px;
-            cursor: zoom-in; transition: transform 0.2s;
-        }
-        .gallery img:hover { transform: scale(1.05); }
-        .caption {
-            position: absolute; bottom: 0; left: 0; width: 100%;
-            background: rgba(0,0,0,0.7); color: white; padding: 8px; font-size: 0.9em;
-            text-align: center; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;
-        }
+        /* Gallery with captions */
+        .gallery {display:flex; flex-wrap:wrap; gap:20px; justify-content:center; padding:20px;}
+        .photo-wrapper {position:relative; width:300px; cursor:zoom-in;}
+        .gallery img {width:100%; height:auto; border:4px solid #8B4513; border-radius:10px; transition:transform .2s;}
+        .gallery img:hover {transform:scale(1.05);}
+        .caption {position:absolute; bottom:0; left:0; width:100%; background:rgba(0,0,0,0.7); color:white; padding:8px; text-align:center; font-size:0.9em; border-bottom-left-radius:8px; border-bottom-right-radius:8px;}
 
         /* Contact */
-        .contact-container {
-            display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap; max-width: 900px; margin: 0 auto;
-        }
-        .contact-photo {
-            width: 220px; height: 220px; border-radius: 50%; object-fit: cover;
-            border: 6px solid #8B4513; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        .email { font-size: 1.5em; font-weight: bold; color: #8B4513; }
+        .contact-container {display:flex; align-items:center; justify-content:center; gap:40px; flex-wrap:wrap; max-width:900px; margin:0 auto;}
+        .contact-photo {width:220px; height:220px; border-radius:50%; object-fit:cover; border:6px solid #8B4513; box-shadow:0 4px 15px rgba(0,0,0,0.3);}
+        .email {font-size:1.5em; font-weight:bold; color:#8B4513;}
 
-        /* Lightbox with zoom scroller & caption */
-        #lightbox {
-            display: none; position: fixed; z-index: 9999; left: 0; top: 0;
-            width ```100%; height: 100%; background: rgba(0,0,0,0.98); overflow: hidden;
-        }
-        #lightbox-img {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-            max-width: 90%; max-height: 85%; transition: transform 0.2s;
-            border: 6px solid #8B4513; border-radius: 12px;
-        }
-        .close-btn {
-            position: absolute; top: 20px; right: 35px; color: white; font-size: 60px;
-            font-weight: bold; cursor: pointer; z-index: 10001;
-        }
-        .lightbox-caption {
-            position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.8);
-            color: white; padding: 15px; text-align: center; font-size: 1.3em;
-        }
-        /* Zoom scroller on the right */
-        #zoom-slider {
-            position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
-            width: 12px; height: 60%; background: rgba(255,255,255,0.3); border-radius: 6px;
-        }
-        #zoom-handle {
-            width: 100%; height: 60px; background: #8B4513; border-radius: 6px; cursor: ns-resize;
-        }
+        /* Lightbox */
+        #lightbox {display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.98); cursor:pointer;}
+        #lightbox-img {position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) scale(1); max-width:90%; max-height:85%; border:6px solid #8B4513; border-radius:12px; transition:transform .2s;}
+        .close-btn {position:absolute; top:20px; right:35px; color:white; font-size:60px; font-weight:bold; cursor:pointer; z-index:10001;}
+        .lightbox-caption {position:absolute; bottom:0; width:100%; background:rgba(0,0,0,0.8); color:white; padding:15px; text-align:center; font-size:1.3em;}
+        #zoom-slider {position:absolute; right:20px; top:50%; transform:translateY(-50%); width:12px; height:60%; background:rgba(255,255,255,0.3); border-radius:6px;}
+        #zoom-handle {width:100%; height:60px; background:#8B4513; border-radius:6px; cursor:ns-resize;}
 
-        footer { BACKGROUND: #8B4513; color: white; padding: 25px; text-align: center; }
+        footer {background:#8B4513; color:white; padding:25px; text-align:center;}
     </style>
 </head>
 <body>
@@ -92,40 +57,40 @@
     <section id="photos">
         <h2>Photo Gallery</h2>
         <div class="gallery">
-            <div class="photo-wrapper"><img src="media/1.1.jpg" alt=""><div class="caption">The fire</div></div>
-            <div class="photo-wrapper"><img src="media/1.jpg" alt=""><div class="caption">Fire ready</div></div>
-            <div class="photo-wrapper"><img src="media/2.1.png" alt=""><div class="caption">Raw material (copper wires top quality)</div></div>
-            <div class="photo-wrapper"><img src="media/2.jpg" alt=""><div class="caption">Raw material (pipes second quality)</div></div>
-            <div class="photo-wrapper"><img src="media/4.jpg" alt=""><div class="caption">Crucible cooling out of gas :(</div></div>
-            <div class="photo-wrapper"><img src="media/5.jpeg" alt=""><div class="caption">Heating pipes to remove contaminants</div></div>
-            <div class="photo-wrapper"><img src="media/6.jpeg" alt=""><div class="caption">Inspecting the GOODS</div></div>
-            <div class="photo-wrapper"><img src="media/7.1.jpeg" alt=""><div class="caption">Copper coins after striking (not polished yet)</div></div>
-            <div class="photo-wrapper"><img src="media/7.jpeg" alt=""><div class="caption">Copper bars before polishing</div></div>
-            <div class="photo-wrapper"><img src="media/8.1.jpeg" alt=""><div class="caption">Close-up detail after polishing</div></div>
-            <div class="photo-wrapper"><img src="media/8.2.jpg" alt=""><div class="caption">Grabbing the goods</div></div>
-            <div class="photo-wrapper"><img src="media/8.3.jpeg" alt=""><div class="caption">Copper and Gold</div></div>
-            <div class="photo-wrapper"><img src="media/8.jpg" alt=""><div class="caption">Hand holding Gold bar</div></div>
-            <div class="photo-wrapper"><img src="media/10.1.jpeg" alt=""><div class="caption">Copper Marvel</div></div>
-            <div class="photo-wrapper"><img src="media/10.jpeg" alt=""><div class="caption">Copper Marvel (Close-up)</div></div>
-            <div class="photo-wrapper"><img src="media/11.1.jpeg" alt=""><div class="caption">All unique art pieces</div></div>
-            <div class="photo-wrapper"><img src="media/12.jpeg" alt=""><div class="caption">Coin ready for shipping</div></div>
-            <div class="photo-wrapper"><img src="media/13.1.jpg" alt=""><div class="caption">Weighting the coin</div></div>
-            <div class="photo-wrapper"><img src="media/13.jpg" alt=""><div class="caption">Bars and coins ready for inspection</div></div>
-            <div class="photo-wrapper"><img src="media/18.jpg" alt=""><div class="caption">Raising the bar</div></div>
-            <div class="photo-wrapper"><img src="media/19.jpeg" alt=""><div class="caption">Metal stamp</div></div>
-            <div class="photo-wrapper"><img src="media/20.jpeg" alt=""><div class="caption">Buisness card</div></div>
-            <div class="photo-wrapper"><img src="media/22.jpg" alt=""><div class="caption">Bars ready for selling</div></div>
-            <div class="photo-wrapper"><img src="media/23.png" alt=""><div class="caption">Contract for Pi Network DONE</div></div>
-            <div class="photo-wrapper"><img src="media/24.png" alt=""><div class="caption">Pi Network coin (made in 2024)</div></div>
-            <div class="photo-wrapper"><img src="media/25.jpg" alt=""><div class="caption">Methodology for Pi project</div></div>
-            <div class="photo-wrapper"><img src="media/26.jpg" alt=""><div class="caption">Hand and feet of my newborn son in PURE METAL</div></div>
+            <div class="photo-wrapper"><img src="media/1.1.jpg" alt=""><div class="caption">Starting the fire</div></div>
+            <div class="photo-wrapper"><img src="media/1.jpg" alt=""><div class="caption">Molten copper glow</div></div>
+            <div class="photo-wrapper"><img src="media/2.1.png" alt=""><div class="caption">Crucible ready</div></div>
+            <div class="photo-wrapper"><img src="media/2.jpg" alt=""><div class="caption">Pouring the melt</div></div>
+            <div class="photo-wrapper"><img src="media/4.jpg" alt=""><div class="_you can change any caption here"></div></div>
+            <div class="photo-wrapper"><img src="media/5.jpeg" alt=""><div class="caption">Working the forge</div></div>
+            <div class="photo-wrapper"><img src="media/6.jpeg" alt=""><div class="caption">Cooling the coin</div></div>
+            <div class="photo-wrapper"><img src="media/7.1.jpeg" alt=""><div class="caption">Finished copper bar</div></div>
+            <div class="photo-wrapper"><img src="media/7.jpeg" alt=""><div class="caption">Pure copper bar</div></div>
+            <div class="photo-wrapper"><img src="media/8.1.jpeg" alt=""><div class="caption">Close-up detail</div></div>
+            <div class="photo-wrapper"><img src="media/8.2.jpg" alt=""><div class="caption">Edge view</div></div>
+            <div class="photo-wrapper"><img src="media/8.3.jpeg" alt=""><div class="caption">Stacked pieces</div></div>
+            <div class="photo-wrapper"><img src="media/8.jpg" alt=""><div class="caption">Hand holding coin</div></div>
+            <div class="photo-wrapper"><img src="media/10.1.jpeg" alt=""><div class="caption">Polishing</div></div>
+            <div class="photo-wrapper"><img src="media/10.jpeg" alt=""><div class="caption">Mirror finish</div></div>
+            <div class="photo-wrapper"><img src="media/11.1.jpeg" alt=""><div class="caption">Collection</div></div>
+            <div class="photo-wrapper"><img src="media/12.jpeg" alt=""><div class="caption">Coin & bar together</div></div>
+            <div class="photo-wrapper"><img src="media/13.1.jpg" alt=""><div class="caption">Lion emblem detail</div></div>
+            <div class="photo-wrapper"><img src="media/13.jpg" alt=""><div class="caption">SIBALEONE Lion coin</div></div>
+            <div class="photo-wrapper"><img src="media/18.jpg" alt=""><div class="caption">Holding the bar</div></div>
+            <div class="photo-wrapper"><img src="media/19.jpeg" alt=""><div class="caption">Logo coin</div></div>
+            <div class="photo-wrapper"><img src="media/20.jpeg" alt=""><div class="caption">Custom minting</div></div>
+            <div class="photo-wrapper"><img src="media/22.jpg" alt=""><div class="caption">Business card coin</div></div>
+            <div class="photo-wrapper"><img src="media/23.png" alt=""><div class="caption">SIBALEONE branding</div></div>
+            <div class="photo-wrapper"><img src="media/24.png" alt=""><div class="caption">Pi Network coin</div></div>
+            <div class="photo-wrapper"><img src="media/25.jpg" alt=""><div class="caption">Pi detail</div></div>
+            <div class="photo-wrapper"><img src="media/26.jpg" alt=""><div class="caption">Pi coin in hand</div></div>
         </div>
     </section>
 
     <section id="contact">
         <h2>Contact</h2>
         <div class="contact-container">
-            <img src="media/Luca.jpg" alt="Luca Urbani" class="contact-photo">
+            <img src="media/9999.jpeg" alt="Luca Urbani" class="contact-photo">
             <div class="contact-text">
                 <p>If you'd like to share your minting stories, ask questions, or collaborate, feel free to reach out:</p>
                 <p><strong>Phone:</strong> 418.376.7316</p>
@@ -152,6 +117,7 @@
         const lbCaption = document.getElementById('lightbox-caption');
         const handle = document.getElementById('zoom-handle');
 
+        // Open lightbox
         document.querySelectorAll('.photo-wrapper').forEach(wrapper => {
             wrapper.addEventListener('click', () => {
                 const img = wrapper.querySelector('img');
@@ -159,33 +125,29 @@
                 lbImg.src = img.src;
                 lbCaption.textContent = caption;
                 lightbox.style.display = 'block';
+                lbImg.style.transform = 'translate(-50%, -50%) scale(1)';
             });
         });
 
+        // Close lightbox
         lightbox.addEventListener('click', e => {
             if (e.target === lightbox || e.target.classList.contains('close-btn')) {
                 lightbox.style.display = 'none';
             }
         });
 
-        // Zoom with vertical scroller
-        let scale = 1;
-        handle.addEventListener('mousedown', e => {
-            e.preventDefault();
-            const move = ev => {
-                const rect = document.getElementById('zoom-slider').getBoundingClientRect();
-                let pos = (ev.clientY - rect.top) / rect.height;
-                pos = Math.max(0, Math.min(1, pos));
-                scale = 0.5 + pos * 3; // 50% → 350% zoom
-                lbImg.style.transform = `translate(-50%, -50%) scale(${scale})`;
-            };
-            const up = () => {
-                document.removeEventListener('mousemove', move);
-                document.removeEventListener('mouseup', up);
-            };
-            document.addEventListener('mousemove', move);
-            document.addEventListener('mouseup', up);
+        // Zoom scroller (fixed — doesn't block clicks)
+        let isDragging = false;
+        handle.addEventListener('mousedown', e => { e.stopPropagation(); isDragging = true; });
+        document.addEventListener('mousemove', e => {
+            if (!isDragging) return;
+            const rect = document.getElementById('zoom-slider').getBoundingClientRect();
+            let pos = (e.clientY - rect.top) / rect.height;
+            pos = Math.max(0, Math.min(1, pos));
+            const scale = 0.5 + pos * 3; // 50% → 350%
+            lbImg.style.transform = `translate(-50%, -50%) scale(${scale})`;
         });
+        document.addEventListener('mouseup', () => isDragging = false);
     </script>
 </body>
 </html>
