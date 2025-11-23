@@ -24,26 +24,42 @@
             border-top-left-radius:10px; border-top-right-radius:10px;
         }
 
-        /* Featured in About */
-        .featured {display:flex; flex-wrap:wrap; gap:30px; justify-content:center; margin-top:40px;}
-        .featured img {width:300px; height:300px; object-fit:cover; border:6px solid #8B4513; border-radius:50%;}
+        /* Featured round photos in About - clickable */
+        .featured {display:flex; flex-wrap:wrap; gap:40px; justify-content:center; margin-top:50px;}
+        .featured .photo-wrapper {
+            width:300px; height:300px; border-radius:50%; overflow:hidden; cursor:zoom-in;
+            border:8px solid #8B4513; box-shadow:0 10px 30px rgba(0,0,0,0.3);
+        }
+        .featured img {width:100%; height:100%; object-fit:cover;}
 
         /* Contact */
         .contact-container {display:flex; align-items:center; justify-content:center; gap:50px; flex-wrap:wrap; max-width:1000px; margin:0 auto;}
         .contact-photo {width:240px; height:240px; border-radius:50%; object-fit:cover; border:7px solid #8B4513; box-shadow:0 8px 25px rgba(0,0,0,0.4);}
         .email {font-size:1.6em; font-weight:bold; color:#8B4513;}
 
-        /* Lightbox - caption on TOP */
-        #lightbox {display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; 
-                   background:rgba(0,0,0,0.98); text-align:center; overflow:auto;}
-        #lightbox .img-container {position:relative; display:inline-block; margin:5% auto;}
-        #lightbox-img {max-width:94%; max-height:78vh; border:7px solid #8B4513; border-radius:14px;}
+        /* Lightbox with arrows */
+        #lightbox {
+            display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%;
+            background:rgba(0,0,0,0.98); text-align:center; overflow:hidden;
+        }
+        #lightbox .img-container {position:relative; display:inline-block; margin:6% auto;}
+        #lightbox-img {
+            max-width:90%; max-height:78vh; border:7px solid #8B4513; border-radius:14px;
+            box-shadow:0 0 40px rgba(0,0,0,0.9);
+        }
         .close-btn {position:fixed; top:15px; right:30px; color:white; font-size:70px; font-weight:bold; cursor:pointer; z-index:10000;}
         .lightbox-caption {
             position:absolute; top:0; left:0; width:100%;
             background:rgba(0,0,0,0.85); color:white; padding:20px; font-size:1.5em; font-weight:bold;
             border-top-left-radius:12px; border-top-right-radius:12px;
         }
+        .nav-arrow {
+            position:fixed; top:50%; transform:translateY(-50%); color:white; font-size:80px;
+            cursor:pointer; user-select:none; z-index:10000; opacity:0.7;
+        }
+        .nav-arrow:hover {opacity:1;}
+        .prev-arrow {left:20px;}
+        .next-arrow {right:20px;}
 
         footer {background:#8B4513; color:white; padding:30px; text-align:center;}
     </style>
@@ -67,14 +83,20 @@
 
         <h3>Featured Work</h3>
         <div class="featured">
-            <img src="media/13.jpg" alt="Lion Coin">
-            <img src="media/24.png" alt="Pi Network Coin">
-            <img src="media/26.jpg" alt="Baby hand & foot in metal">
+            <div class="photo-wrapper" data-caption="SIBALEONE Lion Coin">
+                <img src="media/13.jpg" alt="Lion Coin">
+            </div>
+            <div class="photo-wrapper" data-caption="Pi Network Coin (2024)">
+                <img src="media/24.png" alt="Pi Coin">
+            </div>
+            <div class="photo-wrapper" data-caption="Hand and feet of my newborn son in PURE METAL">
+                <img src="media/26.jpg" alt="Baby print">
+            </div>
         </div>
     </section>
 
     <section id="photos">
-        <h2>Blacksmith process</h2>
+        <h2>Photo Gallery</h2>
         <div class="gallery">
             <div class="photo-wrapper"><img src="media/1.1.jpg" alt=""><div class="caption">The fire</div></div>
             <div class="photo-wrapper"><img src="media/1.jpg" alt=""><div class="caption">Fire ready</div></div>
@@ -118,9 +140,11 @@
         </div>
     </section>
 
-    <!-- Lightbox -->
+    <!-- Lightbox with arrows -->
     <div id="lightbox">
         <span class="close-btn">×</span>
+        <span class="nav-arrow prev-arrow">←</span>
+        <span class="nav-arrow next-arrow">→</span>
         <div class="img-container">
             <img id="lightbox-img" src="" alt="">
             <div class="lightbox-caption" id="lightbox-caption"></div>
@@ -135,25 +159,53 @@
         const lightbox = document.getElementById('lightbox');
         const lbImg = document.getElementById('lightbox-img');
         const lbCaption = document.getElementById('lightbox-caption');
+        const prevBtn = document.querySelector('.prev-arrow');
+        const nextBtn = document.querySelector('.next-arrow');
 
-        document.querySelectorAll('.photo-wrapper').forEach(wrapper => {
-            wrapper.addEventListener('click', () => {
-                const img = wrapper.querySelector('img');
-                const caption = wrapper.querySelector('.caption').textContent;
-                lbImg.src = img.src;
-                lbCaption.textContent = caption;
-                lightbox.style.display = 'block';
-            });
+        let allPhotos = [...document.querySelectorAll('.photo-wrapper')];
+        let currentIndex = 0;
+
+        function openLightbox(index) {
+            currentIndex = index;
+            const wrapper = allPhotos[index];
+            const img = wrapper.querySelector('img');
+            const caption = wrapper.querySelector('.caption') ? wrapper.querySelector('.caption').textContent : wrapper.getAttribute('data-caption') || '';
+            lbImg.src = img.src;
+            lbCaption.textContent = caption;
+            lightbox.style.display = 'block';
+        }
+
+        function closeLightbox() {
+            lightbox.style.display = 'none';
+        }
+
+        function showPrev() {
+            currentIndex = (currentIndex - 1 + allPhotos.length) % allPhotos.length;
+            openLightbox(currentIndex);
+        }
+
+        function showNext() {
+            currentIndex = (currentIndex + 1) % allPhotos.length;
+            openLightbox(currentIndex);
+        }
+
+        // Open on click
+        allPhotos.forEach((wrapper, i) => {
+            wrapper.addEventListener('click', () => openLightbox(i));
         });
 
+        // Navigation
+        prevBtn.addEventListener('click', showPrev);
+        nextBtn.addEventListener('click', showNext);
         lightbox.addEventListener('click', e => {
-            if (e.target === lightbox || e.target.classList.contains('close-btn')) {
-                lightbox.style.display = 'none';
-            }
+            if (e.target === lightbox || e.target.classList.contains('close-btn')) closeLightbox();
         });
-
         document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') lightbox.style.display = 'none';
+            if (lightbox.style.display === 'block') {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') showPrev();
+                if (e.key === 'ArrowRight') showNext();
+            }
         });
     </script>
 </body>
