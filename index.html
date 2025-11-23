@@ -66,9 +66,39 @@
 </head>
 <body>
 
-    <header>
-        <h1>SIBALEONE Metal Minting</h1>
-        <p>Hand-forged copper coins & bars by Luca Urbani — Pure artisan fire.</p>
+     <header style="
+        background: url('media/Lion Header.jpg') center/cover no-repeat;
+        padding: 0;
+        height: 660px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        margin: 0;
+    ">
+        <!-- Dark overlay so the text stays readable -->
+        <div style="
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.58);
+        "></div>
+
+        <!-- Your text – centered over the lion image -->
+        <div style="position: relative; z-index: 2; text-align: center; color: white;">
+            <h1 style="
+                font-size: 5.5rem;
+                margin: 0;
+                text-shadow: 4px 4px 15px rgba(0,0,0,0.9);
+                letter-spacing: 3px;
+            ">SIBALEONE Metal Minting</h1>
+            <p style="
+                font-size: 1.9rem;
+                margin: 15px 0 0;
+                text-shadow: 3px 3px 10px rgba(0,0,0,0.9);
+                letter-spacing: 1.5px;
+            ">Hand-forged copper coins & bars by Luca Urbani — Pure artisan fire.</p>
+        </div>
     </header>
 
     <nav>
