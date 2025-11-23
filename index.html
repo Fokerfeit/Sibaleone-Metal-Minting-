@@ -400,12 +400,90 @@ I confront fear as a warrior does—and each challenge hardens my spirit.</p>
         if (e.key === 'r' || e.key === 'R') { rotation = (rotation + 90) % 360; updateTransform(); }
       });
 
+           // ─────────────────────── ZOOM + PAN (mouse + touch) ───────────────────────
       lbImg.addEventListener('wheel', e => {
         e.preventDefault();
-        scale *= e.deltaY > 0 ? 0.9 : 1.1;
-        scale = Math.max(0.5, Math.min(scale, 8));
+        const delta = e.deltaY > 0 ? 0.9 : 1.1;
+        scale = Math.max(0.5, Math.min(scale * delta, 8));
         updateTransform();
       }, { passive: false });
+
+      let startX = 0, startY = 0, startPanX = 0, startPanY = 0;
+      let startDist = 0, startScale = 1;
+
+      const pointerDown = (e) => {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        const touch = e.touches ? e.touches[0] : e;
+        startX = touch.clientX;
+        startY = touch.clientY;
+        startPanX = panX;
+        startPanY = panY;
+        startScale = scale;
+        if (e.touches && e.touches.length === 2) {
+          startDist = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+          );
+        }
+        isDragging = true;
+        lightbox.classList.add('dragging');
+      };
+
+      const pointerMove = (e) => {
+        if (!isDragging) return;
+
+        if (e.touches && e.touches.length === 2) {
+          // Pinch to zoom – native feel on mobile
+          const currentDist = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+          );
+          scale = startScale * (currentDist / startDist);
+          scale = Math.max(0.5, Math.min(scale, 8));
+        } else {
+          // Pan (only when zoomed or on desktop)
+          const touch = e.touches ? e.touches[0] : e;
+          const dx = touch.clientX - startX;
+          const dy = touch.clientY - startY;
+          if (scale > 1 || e.pointerType === 'mouse') {
+            panX = startPanX + dx;
+            panY = startPanY + dy;
+          }
+        }
+        updateTransform();
+      };
+
+      const pointerUp = () => {
+        isDragging = false;
+        lightbox.classList.remove('dragging');
+      };
+
+      lbImg.addEventListener('pointerdown', pointerDown);
+      lbImg.addEventListener('pointermove', pointerMove);
+      lbImg.addEventListener('pointerup', pointerUp);
+      lbImg.addEventListener('pointercancel', pointerUp);
+      lbImg.addEventListener('pointerleave', pointerUp);
+
+      // Fallback for older touch devices
+      lbImg.addEventListener('touchstart', pointerDown, { passive: true });
+      lbImg.addEventListener('touchmove', pointerMove, { passive: false });
+      lbImg.addEventListener('touchend', pointerUp);
+
+      // Rotate button
+      rotateBtn.addEventListener('click', () => {
+        rotation = (rotation + 90) % 360;
+        updateTransform();
+      });
+
+      // Fallback image on error
+      photos.forEach(p => {
+        const img = p.querySelector('img');
+        img.addEventListener('error', () => {
+          img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500"><rect width="100%" height="100%" fill="%23efe8df"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%238B4513" font-family="Arial, sans-serif" font-size="28">Image not found</text></svg>';
+        });
+      });
+    })();
+  </script>
 
       // Mouse & touch drag/pinch/rotate – all your original code untouched
       // ... (your full drag/pinch/rotate code remains exactly as you wrote it)
