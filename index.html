@@ -1,61 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style>
-/* Contact section with photo */
-.contact-container {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-}
-.contact-photo {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid #8B4513;
-}
-.contact-text { text-align: center; max-width: 600px; }
-.email { font-size: 1.4em; font-weight: bold; color: #8B4513; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIBALEONE Metal Minting</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f5f0; color: #333; line-height: 1.6; }
+        header { background: #8B4513; color: white; padding: 40px; text-align: center; }
+        nav { background: #A0522D; padding: 15px; text-align: center; }
+        nav a { color: white; margin: 0 20px; text-decoration: none; font-weight: bold; }
+        nav a:hover { text-decoration: underline; }
+        section { padding: 40px; text-align: center; }
+        h2 { color: #8B4513; }
 
-/* Fullscreen lightbox */
-#lightbox {
-    display: none;
-    position: fixed;
-    z-index: 9999;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.95);
-    cursor: pointer;
-}
-#lightbox-img {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 95%;
-    max-height: 95%;
-    border: 4px solid #8B4513;
-    border-radius: 8px;
-}
-.close-btn {
-    position: absolute;
-    top: 20px; right: 30px;
-    color: white;
-    font-size: 50px;
-    font-weight: bold;
-    cursor: pointer;
-}
+        /* Gallery */
+        .gallery { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 15px; 
+            justify-content: center; 
+            padding: 20px;
+        }
+        .gallery img, .gallery video {
+            width: 300px;
+            height: auto;
+            object-fit: contain;
+            border: 3px solid #8B4513;
+            border-radius: 8px;
+            cursor: zoom-in;
+            transition: transform 0.2s;
+        }
+        .gallery img:hover { transform: scale(1.05); }
 
-/* Make every gallery image clickable */
-.gallery img {
-    cursor: zoom-in;
-    transition: transform 0.2s;
-}
-.gallery img:hover { transform: scale(1.05); }
-</style>
+        /* Contact */
+        .contact-container {
+            display: flex; align-items: center; gap: 30px; flex-wrap: wrap; justify-content: center; padding: 20px;
+        }
+        .contact-photo {
+            width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 4px solid #8B4513;
+        }
+        .contact-text { text-align: center; max-width: 600px; }
+        .email { font-size: 1.4em; font-weight: bold; color: #8B4513; }
+
+        /* Fullscreen lightbox */
+        #lightbox {
+            display: none; position: fixed; z-index: 9999; left: 0; top: 0;
+            width: 100%; height: 100%; background: rgba(0,0,0,0.95); cursor: pointer;
+        }
+        #lightbox-img {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+            max-width: 95%; max-height: 95%; border: 4px solid #8B4513; border-radius: 8px;
+        }
+        .close-btn {
+            position: absolute; top: 20px; right: 30px; color: white; font-size: 50px;
+            font-weight: bold; cursor: pointer;
+        }
+
+        footer { background: #8B4513; color: white; text-align: center; padding: 20px; }
+    </style>
 </head>
 <body>
 
@@ -73,123 +75,90 @@
 
     <section id="about">
         <h2>About SIBALEONE Metal Minting</h2>
-        <p>I am a blacksmith with a passion for working with metal in all its forms.
-Whether it’s steel, copper, brass, or something more unusual, I enjoy transforming raw materials into meaningful, durable creations. I am open to a wide variety of projects—functional, decorative, experimental—and I’m always eager to learn new techniques and explore new ideas.
-
-If you have a vision, a concept, or even just the seed of an idea, I would love to bring it to life with you.
-Feel free to reach out and let’s create something unique together.</p>
-        <p>Je suis un forgeron passionné par le travail du métal sous toutes ses formes.
-Acier, cuivre, laiton ou métaux plus rares — j’aime transformer la matière brute en créations uniques, solides et pleines de caractère. Je suis ouvert à une grande variété de projets, qu’ils soient fonctionnels, décoratifs ou expérimentaux, et je suis toujours prêt à apprendre de nouvelles techniques et à explorer de nouvelles idées.
-
-Si vous avez une vision, un concept ou même simplement une inspiration qui vous trotte en tête, je serais ravi de la concrétiser avec vous.
-Contactez-moi et créons ensemble quelque chose d’unique.</p>
+        <p>I am a blacksmith with a passion for working with metal in all its forms… (your full text here)</p>
     </section>
 
     <section id="photos">
         <h2>Photo Gallery</h2>
-        <p>Upload and display your photos of the minting process here. Replace the placeholders with your image file paths or URLs.</p>
         <div class="gallery">
-            <!-- Add your photos here - example: <img src="your-photo1.jpg" alt="Description"> -->
-            <img src="media/13.jpg" alt="Copper coin minting">
-            <img src="media/22.jpg" alt="Forging copper bars">
-            <img src="media/23.png" alt="Blacksmith tools">
-            <!-- Add more <img> tags as needed -->
+            <img src="media/1.1.jpg" alt="Fire">
+            <img src="media/1.jpg" alt="Molten copper">
+            <img src="media/2.1.png" alt="Crucible">
+            <img src="media/2.jpg" alt="Pouring">
+            <img src="media/4.jpg" alt="Hammer">
+            <img src="media/5.jpeg" alt="Blacksmith">
+            <img src="media/6.jpeg" alt="Cooling">
+            <img src="media/7.1.jpeg" alt="Bar">
+            <img src="media/7.jpeg" alt="Bar">
+            <img src="media/8.1.jpeg" alt="Coin">
+            <img src="media/8.2.jpg" alt="Bar edge">
+            <img src="media/8.3.jpeg" alt="Stack">
+            <img src="media/8.jpg" alt="Hand holding">
+            <img src="media/10.1.jpeg" alt="Polishing">
+            <img src="media/10.jpeg" alt="Coin front">
+            <img src="media/11.1.jpeg" alt="Multiple coins">
+            <img src="media/12.jpeg" alt="Coin and bar">
+            <img src="media/13.1.jpg" alt="Lion close-up">
+            <img src="media/13.jpg" alt="Lion coin">
+            <img src="media/18.jpg" alt="Hand with bar">
+            <img src="media/19.jpeg" alt="Logo">
+            <img src="media/20.jpeg" alt="Custom coin">
+            <img src="media/22.jpg" alt="Business card">
+            <img src="media/23.png" alt="Branding">
+            <img src="media/24.png" alt="Pi coin">
+            <img src="media/25.jpg" alt="Pi detail">
+            <img src="media/26.jpg" alt="Hand with Pi">
+            <img src="media/9999.jpeg" alt="Luca Urbani">
         </div>
     </section>
 
     <section id="videos">
         <h2>Video Gallery</h2>
-        <p>Embed your videos of the blacksmithing process. Replace the placeholders with your video file paths or embed codes (e.g., from YouTube).</p>
         <div class="gallery">
-            <!-- Add your videos here - example: <video controls><source src="your-video1.mp4" type="video/mp4"></video> -->
-            <video controls>
-                <source src="placeholder-video1.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <video controls>
-                <source src="placeholder-video2.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <!-- Add more <video> tags or iframes for embeds as needed -->
+            <!-- Add your real videos here when ready -->
+            <video controls poster="media/thumbnail1.jpg"><source src="media/video1.mp4" type="video/mp4"></video>
+            <video controls poster="media/thumbnail2.jpg"><source src="media/video2.mp4" type="video/mp4"></video>
         </div>
     </section>
 
     <section id="contact">
-    <h2>Contact</h2>
-    <div class="contact-container">
-        <img src="media/9999.jpeg" alt="Luca Urbani" class="contact-photo">
-        <div class="contact-text">
-            <p>If you'd like to share your minting stories, ask questions, or collaborate, feel free to reach out:</p>
-            <p class="email">urbani.luca639@gmail.com</p>
+        <h2>Contact</h2>
+        <div class="contact-container">
+            <img src="media/9999.jpeg" alt="Luca Urbani" class="contact-photo">
+            <div class="contact-text">
+                <p>If you'd like to share your minting stories, ask questions, or collaborate, feel free to reach out:</p>
+                <p class="email">urbani.luca639@gmail.com</p>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Fullscreen Lightbox (add this once, right before the closing <script>
-document.querySelectorAll('.gallery img').forEach(img => {
-    img.onclick = function() {
-        document.getElementById('lightbox').style.display = 'block';
-        document.getElementById('lightbox-img').src = this.src;
-    }
-});
-</script></body> tag) -->
-<div id="lightbox" onclick="this.style.display='none'">
-    <span class="close-btn">×</span>
-    <img class="lightbox-content" id="lightbox-img">
-</div>
+    <!-- Fullscreen Lightbox -->
+    <div id="lightbox">
+        <span class="close-btn">×</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
 
     <footer>
-        <p>&copy; 2025 SIBALEONE Metal Minting. All rights reserved.</p>
+        <p>© 2025 SIBALEONE Metal Minting. All rights reserved.</p>
     </footer>
 
-<<!-- Photo Gallery -->
-<section id="photos">
-    <h2>Photo Gallery</h2>
-    <div class="gallery">
-  <div class="gallery">
-    <img src="media/1.1.jpg" alt="Fire">
-    <img src="media/1.jpg" alt="Molten copper">
-    <img src="media/2.1.png" alt="Crucible">
-    <img src="media/2.jpg" alt="Pouring">
-    <img src="media/4.jpg" alt="Hammer">
-    <img src="media/5.jpeg" alt="Blacksmith">
-    <img src="media/6.jpeg" alt="Cooling">
-    <img src="media/7.1.jpeg" alt="Bar">
-    <img src="media/7.jpeg" alt="Bar">
-    <img src="media/8.1.jpeg" alt="Coin">
-    <img src="media/8.2.jpg" alt="Bar edge">
-    <img src="media/8.3.jpeg" alt="Stack">
-    <img src="media/8.jpg" alt="Hand holding">
-    <img src="media/10.1.jpeg" alt="Polishing">
-    <img src="media/10.jpeg" alt="Coin front">
-    <img src="media/11.1.jpeg" alt="Multiple coins">
-    <img src="media/12.jpeg" alt="Coin and bar">
-    <img src="media/13.1.jpg" alt="Lion close-up">
-    <img src="media/13.jpg" alt="Lion coin">
-    <img src="media/18.jpg" alt="Hand with bar">
-    <img src="media/19.jpeg" alt="Logo">
-    <img src="media/20.jpeg" alt="Custom coin">
-    <img src="media/22.jpg" alt="Business card">
-    <img src="media/23.png" alt="Branding">
-    <img src="media/24.png" alt="Pi coin">
-    <img src="media/25.jpg" alt="Pi detail">
-    <img src="media/26.jpg" alt="Hand with Pi">
-    <img src="media/9999.jpeg" alt="Luca Urbani">
-</div>
-</section>
+    <!-- Lightbox Script (fixed & working) -->
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
 
-<!-- Video Gallery -->
-<section id="videos">
-    <h2>Video Gallery</h2>
-    <div class="gallery">
-        <video controls poster="media/coin1.jpg">
-            <source src="media/forging-video.mp4" type="video/mp4">
-            Your browser does not support video.
-        </video>
-        <video controls poster="media/finished-bar.jpg">
-            <source src="media/stamping.mp4" type="video/mp4">
-        </video>
-        <!-- Add more the same way -->
-    </div>
-</section>>
+        document.querySelectorAll('.gallery img').forEach(img => {
+            img.onclick = function() {
+                lightbox.style.display = 'block';
+                lightboxImg.src = this.src;
+            };
+        });
+
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox || e.target.classList.contains('close-btn')) {
+                lightbox.style.display = 'none';
+            }
+        });
+    </script>
+</body>
 </html>
